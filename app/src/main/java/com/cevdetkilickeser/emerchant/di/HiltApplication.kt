@@ -1,5 +1,7 @@
 package com.cevdetkilickeser.emerchant.di
 
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class HiltApplication {
-}
+@HiltAndroidApp
+class HiltApplication : Application()
