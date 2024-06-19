@@ -15,7 +15,11 @@ class HomeViewModel @Inject constructor(private val repository: ServiceRepositor
 
     val productList = MutableLiveData<List<Product>>()
 
-    fun getProducts() {
+    init {
+        getProducts()
+    }
+
+    private fun getProducts() {
         CoroutineScope(Dispatchers.Main).launch {
             productList.value = repository.getProducts()
         }

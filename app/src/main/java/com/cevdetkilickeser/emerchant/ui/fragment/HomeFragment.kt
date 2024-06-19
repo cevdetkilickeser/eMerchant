@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container,false)
 
         viewModel.productList.observe(viewLifecycleOwner) {productList ->
-            Log.e("list",productList.toString())
+
 
         }
 
