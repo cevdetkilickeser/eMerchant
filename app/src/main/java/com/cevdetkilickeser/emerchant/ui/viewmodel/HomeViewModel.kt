@@ -22,6 +22,7 @@ class HomeViewModel @Inject constructor(private val repository: ServiceRepositor
     private fun getProducts() {
         CoroutineScope(Dispatchers.Main).launch {
             productList.value = repository.getProducts()
+            println(productList.value)
         }
     }
 }
