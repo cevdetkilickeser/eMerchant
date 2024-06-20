@@ -10,4 +10,29 @@
         android:name="com.cevdetkilickeser.emerchant.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.fragment.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.fragment.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.fragment.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
