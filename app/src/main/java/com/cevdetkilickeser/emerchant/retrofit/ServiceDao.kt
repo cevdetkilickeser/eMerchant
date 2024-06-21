@@ -4,6 +4,7 @@ import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.product.Products
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ServiceDao {
 
@@ -15,5 +16,8 @@ interface ServiceDao {
 
     @GET("products/category/{category}")
     suspend fun getProductsByCategory(@Path("category") category: String): Products
+
+    @GET("products/search")
+    suspend fun searchProducts(@Query("q") query: String): Products
 
 }

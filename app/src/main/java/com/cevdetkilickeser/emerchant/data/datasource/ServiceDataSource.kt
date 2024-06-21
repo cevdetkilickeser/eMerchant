@@ -22,4 +22,9 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.getProductsByCategory(category).products
         }
+
+    suspend fun searchProducts(query: String): List<Product> =
+        withContext(Dispatchers.IO) {
+            return@withContext serviceDao.searchProducts(query).products
+        }
 }

@@ -12,5 +12,8 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_logout">Log Out</string>
 
+    <!-- Search Fragment -->
+    <string name="searchbox">Search Products...</string>
+
 
 </resources>
