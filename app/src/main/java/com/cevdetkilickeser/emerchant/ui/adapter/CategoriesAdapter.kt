@@ -3,9 +3,12 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.databinding.CategoryViewBinding
+import com.cevdetkilickeser.emerchant.ui.fragment.CategoriesFragmentDirections
+import com.google.android.material.snackbar.Snackbar
 
 class CategoriesAdapter(private var context: Context, private var categoryList: List<Category>) :
     RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
@@ -30,7 +33,8 @@ class CategoriesAdapter(private var context: Context, private var categoryList: 
 
         b.categoryViewName.text = category.name
         b.categoryViewCard.setOnClickListener {
-            //geçiş kodu yazılacak
+            val action = CategoriesFragmentDirections.categoriesToCategoryProducts(category)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.data.entity.product
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Product(
     @SerializedName("availabilityStatus")
@@ -48,4 +49,4 @@ data class Product(
     val warrantyInformation: String,
     @SerializedName("weight")
     val weight: Int
-)
+) : Serializable

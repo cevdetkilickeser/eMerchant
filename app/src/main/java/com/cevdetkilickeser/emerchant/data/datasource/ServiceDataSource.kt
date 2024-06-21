@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class ServiceDataSource(private val serviceDao: ServiceDao) {
 
-    suspend fun getProducts() : List<Product> =
+    suspend fun getProducts(): List<Product> =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.getProducts().products
         }
@@ -16,5 +16,10 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
     suspend fun getCategories(): List<Category> =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.getCategories()
+        }
+
+    suspend fun getProductsByCategory(category: String): List<Product> =
+        withContext(Dispatchers.IO) {
+            return@withContext serviceDao.getProductsByCategory(category).products
         }
 }
