@@ -1,5 +1,6 @@
 package com.cevdetkilickeser.emerchant.data.datasource
 
+import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.retrofit.ServiceDao
@@ -26,5 +27,10 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
     suspend fun searchProducts(query: String): List<Product> =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.searchProducts(query).products
+        }
+
+    suspend fun getCarts(userId: String): List<Cart> =
+        withContext(Dispatchers.IO) {
+            return@withContext serviceDao.getCarts(userId).carts
         }
 }

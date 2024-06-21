@@ -38,5 +38,4 @@ class HomeFragment : Fragment() {
         val tempViewModel: HomeViewModel by viewModels()
         viewModel = tempViewModel
     }
-
 }

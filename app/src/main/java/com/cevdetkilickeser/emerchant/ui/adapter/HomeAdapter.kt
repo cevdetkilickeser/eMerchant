@@ -10,8 +10,8 @@ import com.cevdetkilickeser.emerchant.databinding.ProductViewBinding
 
 class HomeAdapter (private var context: Context, private var productList: List<Product>) : RecyclerView.Adapter<HomeAdapter.ProductViewHolder>(){
 
-
-    inner class ProductViewHolder(var binding: ProductViewBinding) :RecyclerView.ViewHolder(binding.root)
+    inner class ProductViewHolder(var binding: ProductViewBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -35,5 +35,4 @@ class HomeAdapter (private var context: Context, private var productList: List<P
             //Detay Activity geçiş kodu yazılacak
         }
     }
-
 }

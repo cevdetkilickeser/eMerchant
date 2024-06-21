@@ -13,7 +13,13 @@
     <string name="menu_logout">Log Out</string>
 
     <!-- Search Fragment -->
-    <string name="searchbox">Search Products...</string>
+    <string name="searchbox">Search Products…</string>
 
+    <!-- Cart Product View -->
+    <string name="quantity">Quantity</string>
+    <string name="cart_product_total">Product\nTotal</string>
+
+    <!-- Cart Product View -->
+    <string name="add_to_cart">Approve Order</string>
 
 </resources>
