@@ -5,7 +5,7 @@ import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.product.Products
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
 import com.cevdetkilickeser.emerchant.data.entity.user.User
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -32,7 +32,7 @@ interface ServiceDao {
     suspend fun getProfile(@Path("userId") userId: String): Profile
 
     @POST("auth/login")
-    @FormUrlEncoded
-    suspend fun login(username: String, password: String): User?
-
+    suspend fun login(@Body request: LoginRequest): User?
 }
+
+data class LoginRequest(val username: String, val password: String)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -48,4 +48,9 @@
             android:name="category"
             app:argType="com.cevdetkilickeser.emerchant.data.entity.category.Category" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cevdetkilickeser.emerchant.ui.screen.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
