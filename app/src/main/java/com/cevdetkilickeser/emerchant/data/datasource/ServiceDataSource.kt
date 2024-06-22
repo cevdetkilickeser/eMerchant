@@ -3,6 +3,8 @@ package com.cevdetkilickeser.emerchant.data.datasource
 import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
+import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
+import com.cevdetkilickeser.emerchant.data.entity.user.User
 import com.cevdetkilickeser.emerchant.retrofit.ServiceDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -33,4 +35,15 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.getCarts(userId).carts
         }
+
+    suspend fun getProfile(userId: String): Profile =
+        withContext(Dispatchers.IO) {
+            return@withContext serviceDao.getProfile(userId)
+        }
+
+    suspend fun login(username: String, password: String): User? =
+        withContext(Dispatchers.IO) {
+            return@withContext serviceDao.login(username, password)
+        }
+
 }

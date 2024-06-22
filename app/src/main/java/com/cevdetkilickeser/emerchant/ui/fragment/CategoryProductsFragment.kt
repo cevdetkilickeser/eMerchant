@@ -46,6 +46,5 @@ class CategoryProductsFragment : Fragment() {
         val tempViewModel: CategoryProducsViewModel by viewModels()
         viewModel = tempViewModel
         viewModel.getProductsByCategory(categoryUrl)
-
     }
 }
