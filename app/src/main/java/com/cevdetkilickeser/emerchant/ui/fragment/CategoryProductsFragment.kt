@@ -25,12 +25,12 @@ class CategoryProductsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCategoryProductsBinding.inflate(layoutInflater)
+        binding = FragmentCategoryProductsBinding.inflate(layoutInflater, container, false)
 
         binding.categoryProductsPageTitle.text = categoryName
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val homeAdapter = HomeAdapter(requireContext(), productList)
+            val homeAdapter = HomeAdapter(requireActivity(), productList)
             binding.rvCategoryProducts.adapter = homeAdapter
         }
 

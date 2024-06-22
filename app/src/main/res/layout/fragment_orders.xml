@@ -69,7 +69,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:text="@string/add_to_cart" />
+                android:text="@string/approve_order" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

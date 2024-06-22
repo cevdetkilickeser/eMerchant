@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -53,7 +52,7 @@
                 android:layout_marginBottom="16dp"
                 android:foregroundGravity="center"
                 android:scaleType="fitCenter"
-                android:tint="#84BA65"
+                app:tint="@color/green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/price" />
@@ -62,7 +61,7 @@
                 android:id="@+id/productViewPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100$"
+                android:text="100"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -74,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:tint="#FEBF00"
+                app:tint="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintEnd_toStartOf="@+id/productViewRate"
                 app:layout_constraintTop_toTopOf="@+id/imageView3"

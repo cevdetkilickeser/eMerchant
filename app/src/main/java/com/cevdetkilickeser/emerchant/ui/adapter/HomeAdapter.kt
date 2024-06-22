@@ -1,14 +1,17 @@
 package com.cevdetkilickeser.emerchant.ui.adapter
 
-import android.content.Context
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.cevdetkilickeser.emerchant.DetailActivity
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.databinding.ProductViewBinding
 
-class HomeAdapter (private var context: Context, private var productList: List<Product>) : RecyclerView.Adapter<HomeAdapter.ProductViewHolder>(){
+class HomeAdapter(private var context: Activity, private var productList: List<Product>) :
+    RecyclerView.Adapter<HomeAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(var binding: ProductViewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -27,12 +30,14 @@ class HomeAdapter (private var context: Context, private var productList: List<P
         val product = productList[position]
         val b = holder.binding
 
-        Glide.with(context).load(product.thumbnail).into(b.productViewImage)
+        Glide.with(b.root).load(product.thumbnail).into(b.productViewImage)
         b.productViewTitle.text = product.title
         b.productViewPrice.text = product.price.toString()
         b.productViewRate.text = product.rating.toString()
         b.productViewCard.setOnClickListener {
-            //Detay Activity geçiş kodu yazılacak
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("product", product)
+            context.startActivity(intent)
         }
     }
 }

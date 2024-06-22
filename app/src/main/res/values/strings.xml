@@ -20,6 +20,20 @@
     <string name="cart_product_total">Product\nTotal</string>
 
     <!-- Cart Product View -->
-    <string name="add_to_cart">Approve Order</string>
+    <string name="approve_order">Approve Order</string>
+
+    <!-- Detail Activity -->
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="info">Informations</string>
+    <string name="brand">Brand</string>
+    <string name="warranty">Warranty</string>
+    <string name="shipping">Shipping</string>
+    <string name="availibility">Availibility</string>
+    <string name="return_policy">Return Policy</string>
+    <string name="weight">Weight (lbs)</string>
+    <string name="width">Width (inch)</string>
+    <string name="height">Height (inch)</string>
+    <string name="depth">Depth (inch)</string>
+    <string name="show_reviews">Show Reviews</string>
 
 </resources>

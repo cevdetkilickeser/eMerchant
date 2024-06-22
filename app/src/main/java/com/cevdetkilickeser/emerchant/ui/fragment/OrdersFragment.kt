@@ -21,7 +21,7 @@ class OrdersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOrdersBinding.inflate(layoutInflater)
+        binding = FragmentOrdersBinding.inflate(layoutInflater, container, false)
 
         viewModel.cartList.observe(viewLifecycleOwner) { cartList ->
             val ordersAdapter = OrdersAdapter(requireContext(), cartList)

@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.data.entity.product
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Meta(
     @SerializedName("barcode")
@@ -12,4 +13,4 @@ data class Meta(
     val qrCode: String,
     @SerializedName("updatedAt")
     val updatedAt: String
-)
+) : Serializable

@@ -22,10 +22,10 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val homeAdapter = HomeAdapter(requireContext(), productList)
+            val homeAdapter = HomeAdapter(requireActivity(), productList)
             binding.rvSearch.adapter = homeAdapter
         }
 

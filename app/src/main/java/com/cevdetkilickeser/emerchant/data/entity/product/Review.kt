@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.data.entity.product
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Review(
     @SerializedName("comment")
@@ -14,4 +15,4 @@ data class Review(
     val reviewerEmail: String,
     @SerializedName("reviewerName")
     val reviewerName: String
-)
+) : Serializable
