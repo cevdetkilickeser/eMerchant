@@ -14,14 +14,9 @@ class LoginViewModel @Inject constructor(private val repository: ServiceReposito
 
     val user = MutableLiveData<User>()
 
-    init {
-
-    }
-
     fun login(username: String, password: String) {
         viewModelScope.launch {
             user.value = repository.login(username, password)
-            //shared'a kaydet
         }
     }
 

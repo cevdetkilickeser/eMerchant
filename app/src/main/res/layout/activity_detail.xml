@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
@@ -74,23 +73,24 @@
         app:layout_constraintTop_toBottomOf="@+id/detailPageTitle" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/labelInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/info"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailPageDescription" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="@+id/labelInfo"
         app:layout_constraintEnd_toStartOf="@+id/detailPageRating"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/labelInfo"
         app:srcCompat="@drawable/star"
         app:tint="@color/yellow" />
 
@@ -102,9 +102,9 @@
         android:text="3.98"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="@+id/labelInfo"
         app:layout_constraintEnd_toStartOf="@+id/detailPageReviews"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/labelInfo" />
 
     <TextView
         android:id="@+id/detailPageReviews"
@@ -114,9 +114,9 @@
         android:textColor="@color/blue"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="@+id/labelInfo"
         app:layout_constraintEnd_toEndOf="@+id/scrollView"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/labelInfo" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -129,7 +129,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintTop_toBottomOf="@+id/labelInfo">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/labelBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -152,7 +152,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/labelWaranty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -161,7 +161,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/labelShipping"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -170,7 +170,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/labelAvailibility"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -179,7 +179,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/labelReturn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -188,7 +188,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/labelDetailWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -197,7 +197,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/labelDetailWidth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -206,7 +206,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/labelDetailHeigt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -215,7 +215,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/labelDetailDepth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -237,6 +237,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -246,6 +247,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -255,6 +257,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -264,6 +267,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -273,6 +277,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -282,6 +287,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -291,6 +297,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -300,6 +307,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -309,7 +317,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="TextView"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </LinearLayout>

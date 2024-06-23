@@ -4,9 +4,11 @@ import com.cevdetkilickeser.emerchant.data.entity.cart.Carts
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.product.Products
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
+import com.cevdetkilickeser.emerchant.data.entity.user.LoginRequest
 import com.cevdetkilickeser.emerchant.data.entity.user.User
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -31,8 +33,10 @@ interface ServiceDao {
     @GET("users/{userId}")
     suspend fun getProfile(@Path("userId") userId: String): Profile
 
+    @GET("auth/me")
+    suspend fun getAuthUserProfile(@Header("Authorization") token: String): Profile
+
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): User?
 }
 
-data class LoginRequest(val username: String, val password: String)
