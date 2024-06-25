@@ -2,15 +2,17 @@ package com.cevdetkilickeser.emerchant.data.datasource
 
 import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
+import com.cevdetkilickeser.emerchant.data.entity.like.Like
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
 import com.cevdetkilickeser.emerchant.data.entity.user.LoginRequest
 import com.cevdetkilickeser.emerchant.data.entity.user.User
 import com.cevdetkilickeser.emerchant.retrofit.ServiceDao
+import com.cevdetkilickeser.emerchant.room.LikeDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class ServiceDataSource(private val serviceDao: ServiceDao) {
+class DataSource(private val serviceDao: ServiceDao, private val likeDao: LikeDao) {
 
     suspend fun getProducts(): List<Product> =
         withContext(Dispatchers.IO) {
@@ -37,11 +39,6 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
             return@withContext serviceDao.getCarts(userId).carts
         }
 
-    suspend fun getProfile(userId: String): Profile =
-        withContext(Dispatchers.IO) {
-            return@withContext serviceDao.getProfile(userId)
-        }
-
     suspend fun getAuthUserProfile(token: String): Profile =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.getAuthUserProfile(token)
@@ -55,4 +52,22 @@ class ServiceDataSource(private val serviceDao: ServiceDao) {
                 return@withContext null
             }
         }
+
+    suspend fun getLikes(userId: String): List<Like> =
+        withContext(Dispatchers.IO) {
+            return@withContext likeDao.getLikes(userId)
+        }
+
+    suspend fun checkLike(userId: String, productId: String): Like =
+        withContext(Dispatchers.IO) {
+            return@withContext likeDao.checkLike(userId, productId)
+        }
+
+    suspend fun insertLike(like: Like) {
+        likeDao.insertLike(like)
+    }
+
+    suspend fun deleteLike(like: Like) {
+        likeDao.deleteLike(like)
+    }
 }
