@@ -34,11 +34,14 @@ class SplashScreenActivity : AppCompatActivity() {
                     this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putString("token", it.token)
+                editor.putString("userId", user.id.toString())
                 editor.apply()
+
                 val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                 intent.putExtra("user", it)
                 startActivity(intent)
                 finish()
+
             } ?: run {
                 val intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
                 startActivity(intent)

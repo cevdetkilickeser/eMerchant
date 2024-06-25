@@ -34,12 +34,20 @@ class LoginActivity : AppCompatActivity() {
         val tempViewModel: LoginViewModel by viewModels()
         viewModel = tempViewModel
 
+        val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
         viewModel.user.observe(this) { user ->
             user?.let {
+                editor.putString("token", it.token)
+                editor.putString("userId", it.id.toString())
+                editor.apply()
+
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.putExtra("user", user)
                 startActivity(intent)
                 finish()
+
             } ?: run {
                 Snackbar.make(binding.root, "Login Error", Snackbar.LENGTH_SHORT).show()
             }

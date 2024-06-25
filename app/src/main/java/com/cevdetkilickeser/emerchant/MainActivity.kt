@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             val editor = sharedPref.edit()
             editor.putString("username", "")
             editor.putString("password", "")
+            editor.putString("userId", "")
+            editor.putString("token", "")
             editor.apply()
 
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
