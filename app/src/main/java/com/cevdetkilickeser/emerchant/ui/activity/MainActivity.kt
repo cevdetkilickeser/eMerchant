@@ -69,10 +69,20 @@ class MainActivity : AppCompatActivity() {
 
         val headerView = binding.navigationView.getHeaderView(0)
         headerBinding = DrawerHeaderBinding.bind(headerView)
-        headerBinding.headerName.text = user.firstName
-        headerBinding.headerLastname.text = user.lastName
-        Glide.with(binding.root).load(user.image).into(headerBinding.headerImage)
+        headerBinding.apply {
+            headerName.text = user.firstName
+            headerLastname.text = user.lastName
+            Glide.with(this.root).load(user.image).into(this.headerImage)
+        }
 
+        onClickBackPress()
+
+        setUpRemoteConfig()
+
+        listenConfigUpdates()
+    }
+
+    private fun onClickBackPress() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -83,30 +93,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
 
+    private fun setUpRemoteConfig() {
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 3600
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-
-        fetchRemoteConfig()
-
-        remoteConfig.addOnConfigUpdateListener(object : ConfigUpdateListener {
-            override fun onUpdate(configUpdate: ConfigUpdate) {
-                Log.d("Remote Config", "Updated keys: " + configUpdate.updatedKeys);
-
-                if (configUpdate.updatedKeys.contains("welcome_message")) {
-                    remoteConfig.activate().addOnCompleteListener {
-                    }
-                }
-            }
-
-            override fun onError(error: FirebaseRemoteConfigException) {
-                Log.w("Remote Config", "Config update error with code: " + error.code, error)
-            }
-        })
     }
 
     private fun fetchRemoteConfig() {
@@ -130,5 +125,18 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
             binding.navHostFragment.setBackgroundColor(Color.TRANSPARENT)
         }
+    }
+
+    private fun listenConfigUpdates() {
+        remoteConfig.addOnConfigUpdateListener(object : ConfigUpdateListener {
+            override fun onUpdate(configUpdate: ConfigUpdate) {
+                Log.d("Remote Config", "Updated keys: " + configUpdate.updatedKeys)
+                fetchRemoteConfig()
+            }
+
+            override fun onError(error: FirebaseRemoteConfigException) {
+                Log.w("Remote Config", "Config update error with code: " + error.code, error)
+            }
+        })
     }
 }
