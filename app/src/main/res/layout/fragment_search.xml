@@ -25,7 +25,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/rectangle_shape"
+        android:background="@drawable/shape_rectangle"
         android:elevation="5dp"
         android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"

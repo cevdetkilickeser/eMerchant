@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    android:background="@color/white"
+    tools:context=".ui.activity.DetailActivity">
 
     <ImageView
         android:id="@+id/detilPageImage"
         android:layout_width="0dp"
         android:layout_height="250dp"
+        android:layout_marginTop="8dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailPageBackButton"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <ImageButton
         android:id="@+id/detailPageBackButton"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
-        android:src="@drawable/back"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
@@ -33,26 +35,30 @@
         android:id="@+id/detailPageCheckbox"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="32dp"
-        android:button="@drawable/checkbox_selector"
+        android:layout_marginEnd="24dp"
+        android:button="@drawable/selector_checkbox"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        app:buttonTint="@color/red"
+        app:buttonTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/detailPageBackButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/detailPageBackButton" />
 
     <TextView
         android:id="@+id/detailPageTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:ellipsize="none"
         android:maxLines="2"
         android:singleLine="false"
         android:text="Annibale Colombo Sofa"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detilPageImage" />
@@ -62,7 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
         android:ellipsize="none"
         android:maxLines="5"
@@ -70,7 +76,7 @@
         android:text="The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailPageTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/imageStar" />
 
     <TextView
         android:id="@+id/labelInfo"
@@ -88,23 +94,27 @@
         android:id="@+id/imageStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/labelInfo"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toStartOf="@+id/detailPageRating"
-        app:layout_constraintTop_toTopOf="@+id/labelInfo"
-        app:srcCompat="@drawable/star"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailPageTitle"
+        app:srcCompat="@drawable/ic_star"
         app:tint="@color/yellow" />
 
     <TextView
         android:id="@+id/detailPageRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="3.98"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/labelInfo"
-        app:layout_constraintEnd_toStartOf="@+id/detailPageReviews"
-        app:layout_constraintTop_toTopOf="@+id/labelInfo" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageStar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageStar"
+        app:layout_constraintTop_toTopOf="@+id/imageStar" />
 
     <TextView
         android:id="@+id/detailPageReviews"
@@ -139,7 +149,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -149,6 +159,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/brand"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -158,6 +169,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="Warranty"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -167,6 +179,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/shipping"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -176,6 +189,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/availibility"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -185,6 +199,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/return_policy"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -194,6 +209,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/weight"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -203,6 +219,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/width"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -212,6 +229,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/height"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -221,13 +239,14 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:text="@string/depth"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
@@ -327,7 +346,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -338,24 +357,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="3"
             android:text="$ 22299,99"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <Button
-            android:id="@+id/detailPageAddToCart"
+            android:id="@+id/detailPageAddToCartButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:text="@string/add_to_cart"
-            app:icon="@drawable/add_to_cart"
+            app:icon="@drawable/ic_add_to_cart"
             app:iconGravity="textStart"
             app:iconTint="@color/white" />
 

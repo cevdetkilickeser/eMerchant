@@ -86,6 +86,6 @@ dependencies {
     //Glide
     implementation(libs.glide)
 
-    //Lottie
-    implementation(libs.lottie)
+    //EventBus
+    implementation(libs.eventbus)
 }

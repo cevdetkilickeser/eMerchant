@@ -22,21 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:text="Emily"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/headerLastname"
         app:layout_constraintStart_toEndOf="@+id/headerImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="@+id/headerImage" />
 
     <TextView
         android:id="@+id/headerLastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Johnson"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/headerName"
-        app:layout_constraintTop_toBottomOf="@+id/headerName" />
+        app:layout_constraintBottom_toBottomOf="@+id/headerImage"
+        app:layout_constraintStart_toStartOf="@+id/headerName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

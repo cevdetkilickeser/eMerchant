@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/productViewCard"
@@ -52,10 +53,10 @@
                 android:layout_marginBottom="16dp"
                 android:foregroundGravity="center"
                 android:scaleType="fitCenter"
-                app:tint="@color/green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/price" />
+                app:srcCompat="@drawable/ic_price"
+                app:tint="@color/green" />
 
             <TextView
                 android:id="@+id/productViewPrice"
@@ -73,11 +74,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                app:tint="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintEnd_toStartOf="@+id/productViewRate"
                 app:layout_constraintTop_toTopOf="@+id/imageView3"
-                app:srcCompat="@drawable/star" />
+                app:srcCompat="@drawable/ic_star"
+                app:tint="@color/yellow" />
 
             <TextView
                 android:id="@+id/productViewRate"
@@ -87,7 +88,7 @@
                 android:padding="1dp"
                 android:text="3.25"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />

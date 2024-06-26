@@ -49,6 +49,9 @@
     <string name="eye_color">Eye Color</string>
     <string name="hair_color">Hair Color</string>
     <string name="hair_type">Hair Type</string>
+    <string name="email">E-Mail</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
 
 
 </resources>
