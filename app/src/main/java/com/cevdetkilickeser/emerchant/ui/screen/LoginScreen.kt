@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,6 +26,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.cevdetkilickeser.emerchant.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     onLoginClick: (String, String) -> Unit
@@ -51,9 +55,15 @@ fun LoginScreen(
             value = username.value,
             onValueChange = { username.value = it },
             label = { Text("Username") },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Black,
+                focusedLabelColor = Color.Black,
+                cursorColor = Color.Black
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp)
+                .padding(start = 32.dp, end = 32.dp),
+
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -62,6 +72,11 @@ fun LoginScreen(
             value = password.value,
             onValueChange = { password.value = it },
             label = { Text("Password") },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Black,
+                focusedLabelColor = Color.Black,
+                cursorColor = Color.Black
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 32.dp, end = 32.dp),
@@ -78,7 +93,10 @@ fun LoginScreen(
             enabled = username.value.isNotEmpty() && password.value.isNotEmpty(),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp)
+                .padding(start = 32.dp, end = 32.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (username.value.isNotEmpty() && password.value.isNotEmpty()) Color.Black else Color.Gray
+            )
         ) {
             Text("Login")
         }
