@@ -30,12 +30,11 @@ class DataSource(private val serviceDao: ServiceDao, private val likeDao: LikeDa
             return@withContext serviceDao.getAuthUserProfile(token)
         }
 
-    suspend fun updateProfile(userId: String, lastName: String): Int =
+    suspend fun updateProfile(userId: String, updateProfileRequest: UpdateProfileRequest): Profile =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.updateProfile(
-                userId.toInt(),
-                UpdateProfileRequest(lastName)
-            ).id
+                userId.toInt(), updateProfileRequest
+            )
         }
 
     suspend fun getProducts(): List<Product> =

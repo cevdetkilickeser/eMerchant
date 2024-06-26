@@ -6,6 +6,7 @@ import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
+import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
 import com.cevdetkilickeser.emerchant.data.entity.user.User
 
 class Repository(private val dataSource: DataSource) {
@@ -16,8 +17,8 @@ class Repository(private val dataSource: DataSource) {
     suspend fun getAuthUserProfile(token: String): Profile =
         dataSource.getAuthUserProfile(token)
 
-    suspend fun updateProfile(userId: String, lastName: String): Int =
-        dataSource.updateProfile(userId, lastName)
+    suspend fun updateProfile(userId: String, updateProfileRequest: UpdateProfileRequest): Profile =
+        dataSource.updateProfile(userId, updateProfileRequest)
 
     suspend fun getProducts(): List<Product> =
         dataSource.getProducts()

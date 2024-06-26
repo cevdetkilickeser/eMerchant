@@ -28,7 +28,10 @@ interface ServiceDao {
 
     @Headers("Content-Type: application/json")
     @PUT("users/{id}")
-    fun updateProfile(@Path("id") id: Int, @Body updateUserRequest: UpdateProfileRequest): Profile
+    suspend fun updateProfile(
+        @Path("id") id: Int,
+        @Body updateUserRequest: UpdateProfileRequest
+    ): Profile
 
     @GET("products")
     suspend fun getProducts(): Products

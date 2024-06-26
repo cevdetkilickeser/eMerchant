@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.cevdetkilickeser.emerchant.R
+import com.cevdetkilickeser.emerchant.data.entity.profile.Hair
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
+import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
 import com.cevdetkilickeser.emerchant.databinding.FragmentProfileBinding
 import com.cevdetkilickeser.emerchant.ui.viewmodel.ProfileViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -23,9 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
@@ -36,43 +36,61 @@ class ProfileFragment : Fragment() {
             loadProfileInfo(profile)
         }
 
-        viewModel.updateProfileId.observe(viewLifecycleOwner) {
-            Snackbar.make(binding.root, "Profile updated.\n(User Id: $it)", Snackbar.LENGTH_SHORT)
-                .show()
+        viewModel.updatedProfile.observe(viewLifecycleOwner) {
+            loadProfileInfo(it)
         }
 
         binding.linearLayoutPersonalInfo.setOnClickListener {
             if (binding.profilePagePersInfoDetail.visibility == View.VISIBLE) {
                 binding.profilePagePersInfoDetail.visibility = View.GONE
-                binding.buttonSavePersInfo.visibility = View.GONE
                 binding.personalInfoArrow.setImageResource(R.drawable.ic_arrow_down)
             } else {
                 binding.profilePagePersInfoDetail.visibility = View.VISIBLE
-                binding.buttonSavePersInfo.visibility = View.VISIBLE
                 binding.personalInfoArrow.setImageResource(R.drawable.ic_arrow_up)
             }
         }
 
-        binding.buttonSavePersInfo.setOnClickListener {
-            //val lastName = binding.lastName.text.toString()
-            //viewModel.updateProfile(userId, lastName)
-            Snackbar.make(binding.root, "Profile updated.", Snackbar.LENGTH_SHORT)
-                .show()
-        }
-
-        binding.buttonSaveContactInfo.setOnClickListener {
-            Snackbar.make(binding.root, "Profile updated.", Snackbar.LENGTH_SHORT)
-                .show()
+        binding.buttonSaveChanges.setOnClickListener {
+            var updateProfileRequest: UpdateProfileRequest
+            binding.apply {
+                val firstName = firstName.text.toString()
+                val lastName = lastName.text.toString()
+                val age = age.text.toString().toInt()
+                val gender = gender.text.toString()
+                val birthDt = birthDt.text.toString()
+                val blood = blood.text.toString()
+                val height = height.text.toString().toDouble()
+                val weight = weight.text.toString().toDouble()
+                val eyeColor = eyeColor.text.toString()
+                val hairColor = hairColor.text.toString()
+                val hairType = hairType.text.toString()
+                val email = email.text.toString()
+                val phone = phone.text.toString()
+                updateProfileRequest = UpdateProfileRequest(
+                    age,
+                    birthDt,
+                    blood,
+                    email,
+                    eyeColor,
+                    firstName,
+                    gender,
+                    Hair(hairColor, hairType),
+                    height,
+                    lastName,
+                    phone,
+                    weight
+                )
+            }
+            viewModel.updateProfile(userId, updateProfileRequest)
+            Snackbar.make(binding.root, "Profile updated.", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.linearLayoutContactInfo.setOnClickListener {
             if (binding.profilePageContactInfoDetail.visibility == View.VISIBLE) {
                 binding.profilePageContactInfoDetail.visibility = View.GONE
-                binding.buttonSaveContactInfo.visibility = View.GONE
                 binding.contactInfoArrow.setImageResource(R.drawable.ic_arrow_down)
             } else {
                 binding.profilePageContactInfoDetail.visibility = View.VISIBLE
-                binding.buttonSaveContactInfo.visibility = View.VISIBLE
                 binding.contactInfoArrow.setImageResource(R.drawable.ic_arrow_up)
             }
         }
