@@ -4,11 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.cevdetkilickeser.emerchant.R
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
+import com.cevdetkilickeser.emerchant.data.entity.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ActivityDetailBinding
+import com.cevdetkilickeser.emerchant.ui.adapter.ReviewAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.DetailViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,6 +74,11 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        binding.detailPageReviews.setOnClickListener {
+            val reviews = product.reviews
+            showReviewsBottomSheet(reviews)
+        }
+
         binding.detailPageAddToCartButton.setOnClickListener {
             viewModel.addCart(userId, listOf(product))
         }
@@ -91,5 +101,17 @@ class DetailActivity : AppCompatActivity() {
                 detailPagePrice.text = "$ " + it.price.toString()
             }
         }
+    }
+
+    private fun showReviewsBottomSheet(reviews: List<Review>) {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val bottomSheetView = layoutInflater.inflate(R.layout.layout_bottom_sheet_reviews, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
+
+        val recyclerViewReviews =
+            bottomSheetView.findViewById<RecyclerView>(R.id.recyclerViewReviews)
+        recyclerViewReviews.adapter = ReviewAdapter(this, reviews)
+
+        bottomSheetDialog.show()
     }
 }
