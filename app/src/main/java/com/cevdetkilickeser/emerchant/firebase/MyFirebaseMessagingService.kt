@@ -10,11 +10,10 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.cevdetkilickeser.emerchant.R
 import com.cevdetkilickeser.emerchant.ui.activity.MainActivity
+import com.cevdetkilickeser.emerchant.utils.channelId
+import com.cevdetkilickeser.emerchant.utils.channelName
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
-const val channelId = "notification_channel"
-const val channelName = "com.cevdetkilickeser.emerchant"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 

@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
+import com.cevdetkilickeser.emerchant.data.order.Order
 import com.cevdetkilickeser.emerchant.utils.RoomTypeConverter
 
-@Database(entities = [Like::class], version = 1, exportSchema = false)
+@Database(entities = [Like::class, Order::class], version = 1, exportSchema = false)
 @TypeConverters(RoomTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -23,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "like_database"
+                    "app_database"
                 ).build()
 
                 INSTANCE = instance
