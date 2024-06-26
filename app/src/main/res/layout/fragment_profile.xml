@@ -82,7 +82,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/shape_rectangle"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayoutPersonalInfo"
                 app:layout_constraintStart_toStartOf="@+id/linearLayoutPersonalInfo"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutPersonalInfo">
@@ -351,7 +351,7 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -386,10 +386,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="500dp"
                 android:background="@drawable/shape_rectangle"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayoutContactInfo"
                 app:layout_constraintStart_toStartOf="@+id/linearLayoutContactInfo"
                 app:layout_constraintTop_toBottomOf="@id/linearLayoutContactInfo">
@@ -463,6 +461,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/save"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/profilePagePersInfoDetail"
                 app:layout_constraintStart_toStartOf="@+id/profilePagePersInfoDetail"
                 app:layout_constraintTop_toBottomOf="@+id/profilePagePersInfoDetail" />
@@ -474,7 +473,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/save"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/profilePageContactInfoDetail"
                 app:layout_constraintStart_toStartOf="@+id/profilePageContactInfoDetail"
                 app:layout_constraintTop_toBottomOf="@+id/profilePageContactInfoDetail" />

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,12 +59,13 @@ fun LoginScreen(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Black,
                 focusedLabelColor = Color.Black,
-                cursorColor = Color.Black
+                cursorColor = Color.Black,
+                selectionColors = TextSelectionColors(Color.Black, Color.Gray)
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 32.dp, end = 32.dp),
-
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -75,12 +77,14 @@ fun LoginScreen(
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Black,
                 focusedLabelColor = Color.Black,
-                cursorColor = Color.Black
+                cursorColor = Color.Black,
+                selectionColors = TextSelectionColors(Color.Black, Color.Gray)
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 32.dp, end = 32.dp),
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(24.dp))
