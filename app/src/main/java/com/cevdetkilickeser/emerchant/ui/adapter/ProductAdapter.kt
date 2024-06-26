@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.cevdetkilickeser.emerchant.DetailActivity
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.databinding.ProductViewBinding
+import com.cevdetkilickeser.emerchant.ui.activity.DetailActivity
 
-class HomeAdapter(private var context: Activity, private var productList: List<Product>) :
-    RecyclerView.Adapter<HomeAdapter.ProductViewHolder>() {
+class ProductAdapter(private var context: Activity, private var productList: List<Product>) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(var binding: ProductViewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -28,16 +28,17 @@ class HomeAdapter(private var context: Activity, private var productList: List<P
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        val b = holder.binding
 
-        Glide.with(b.root).load(product.thumbnail).into(b.productViewImage)
-        b.productViewTitle.text = product.title
-        b.productViewPrice.text = product.price.toString()
-        b.productViewRate.text = product.rating.toString()
-        b.productViewCard.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("product", product)
-            context.startActivity(intent)
+        holder.binding.apply {
+            Glide.with(this.root).load(product.thumbnail).into(this.productViewImage)
+            productViewTitle.text = product.title
+            productViewPrice.text = product.price.toString()
+            productViewRate.text = product.rating.toString()
+            productViewCard.setOnClickListener {
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("product", product)
+                context.startActivity(intent)
+            }
         }
     }
 }

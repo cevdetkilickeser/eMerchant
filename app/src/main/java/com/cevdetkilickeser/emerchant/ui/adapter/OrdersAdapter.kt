@@ -21,18 +21,26 @@ class OrdersAdapter(private var context: Context, private var cartList: List<Car
     }
 
     override fun getItemCount(): Int {
-        return cartList[0].cartProduct.size
+        return try {
+            cartList[0].cartProduct.size
+        } catch (_: Exception) {
+            0
+        }
+
     }
 
     override fun onBindViewHolder(holder: CartProductViewHolder, position: Int) {
-        val cartProduct = cartList[0].cartProduct[position]
-        val b = holder.binding
+        if (cartList.isNotEmpty()) {
+            val cart = cartList[0]
+            val cartProduct = cart.cartProduct[position]
 
-        Glide.with(context).load(cartProduct.thumbnail).into(b.cartPrductViewImage)
-        b.cartPrductViewTitle.text = cartProduct.title
-        b.cartPrductViewPrice.text = "$ " + cartProduct.price.toString()
-        b.cartPrductViewQuantity.text = cartProduct.quantity.toString()
-        b.cartPrductViewTotal.text = "$ " + String.format("%.2f", cartProduct.total)
-
+            holder.binding.apply {
+                Glide.with(this.root).load(cartProduct.thumbnail).into(this.cartPrductViewImage)
+                cartPrductViewTitle.text = cartProduct.title
+                cartPrductViewPrice.text = "$ " + cartProduct.price.toString()
+                cartPrductViewQuantity.text = cartProduct.quantity.toString()
+                cartPrductViewTotal.text = "$ " + String.format("%.2f", cartProduct.total)
+            }
+        }
     }
 }

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.databinding.CategoryViewBinding
 import com.cevdetkilickeser.emerchant.ui.fragment.CategoriesFragmentDirections
-import com.google.android.material.snackbar.Snackbar
 
 class CategoriesAdapter(private var context: Context, private var categoryList: List<Category>) :
     RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
@@ -29,13 +28,13 @@ class CategoriesAdapter(private var context: Context, private var categoryList: 
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
         val category = categoryList[position]
-        val b = holder.binding
 
-        b.categoryViewName.text = category.name
-        b.categoryViewCard.setOnClickListener {
-            val action = CategoriesFragmentDirections.categoriesToCategoryProducts(category)
-            Navigation.findNavController(it).navigate(action)
+        holder.binding.apply {
+            categoryViewName.text = category.name
+            categoryViewCard.setOnClickListener {
+                val action = CategoriesFragmentDirections.categoriesToCategoryProducts(category)
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
-
 }
