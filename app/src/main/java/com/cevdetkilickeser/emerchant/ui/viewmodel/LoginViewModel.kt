@@ -19,5 +19,4 @@ class LoginViewModel @Inject constructor(private val repository: Repository) : V
             user.value = repository.login(username, password)
         }
     }
-
 }

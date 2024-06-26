@@ -2,11 +2,10 @@ package com.cevdetkilickeser.emerchant.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.repo.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class CategoriesViewModel @Inject constructor(private val repository: Repository
     }
 
     private fun getCategories() {
-        CoroutineScope(Dispatchers.Main).launch {
+        viewModelScope.launch {
             caregoryList.value = repository.getCategories()
         }
     }
