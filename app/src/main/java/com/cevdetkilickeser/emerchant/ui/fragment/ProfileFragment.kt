@@ -60,6 +60,11 @@ class ProfileFragment : Fragment() {
                 .show()
         }
 
+        binding.buttonSaveContactInfo.setOnClickListener {
+            Snackbar.make(binding.root, "Profile updated.", Snackbar.LENGTH_SHORT)
+                .show()
+        }
+
         binding.linearLayoutContactInfo.setOnClickListener {
             if (binding.profilePageContactInfoDetail.visibility == View.VISIBLE) {
                 binding.profilePageContactInfoDetail.visibility = View.GONE
@@ -71,7 +76,6 @@ class ProfileFragment : Fragment() {
                 binding.contactInfoArrow.setImageResource(R.drawable.ic_arrow_up)
             }
         }
-
         return binding.root
     }
 
@@ -88,20 +92,21 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadProfileInfo(profile: Profile) {
-        Glide.with(binding.root).load(profile.image).into(binding.profilePageImage)
-        binding.firstName.setText(profile.firstName)
-        binding.lastName.setText(profile.lastName)
-        binding.age.setText(profile.age.toString())
-        binding.gender.setText(profile.gender)
-        binding.birthDt.setText(profile.birthDate)
-        binding.blood.setText(profile.bloodGroup)
-        binding.height.setText(profile.height.toString())
-        binding.weight.setText(profile.weight.toString())
-        binding.eyeColor.setText(profile.eyeColor)
-        binding.hairColor.setText(profile.hair.color)
-        binding.hairType.setText(profile.hair.type)
-
-        binding.email.setText(profile.email)
-        binding.phone.setText(profile.phone)
+        binding.apply {
+            Glide.with(this.root).load(profile.image).into(this.profilePageImage)
+            firstName.setText(profile.firstName)
+            lastName.setText(profile.lastName)
+            age.setText(profile.age.toString())
+            gender.setText(profile.gender)
+            birthDt.setText(profile.birthDate)
+            blood.setText(profile.bloodGroup)
+            height.setText(profile.height.toString())
+            weight.setText(profile.weight.toString())
+            eyeColor.setText(profile.eyeColor)
+            hairColor.setText(profile.hair.color)
+            hairType.setText(profile.hair.type)
+            email.setText(profile.email)
+            phone.setText(profile.phone)
+        }
     }
 }
