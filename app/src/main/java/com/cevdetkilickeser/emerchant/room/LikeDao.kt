@@ -12,8 +12,8 @@ interface LikeDao {
     @Query("SELECT * FROM likes WHERE userId = :userId")
     suspend fun getLikes(userId: String): List<Like>
 
-    @Query("SELECT * FROM likes WHERE userId = :userId AND productId = :productId")
-    suspend fun checkLike(userId: String, productId: String): Like
+    @Query("SELECT * FROM likes WHERE userId = :userId AND id = :productId")
+    suspend fun checkLike(userId: String, productId: Int): Like
 
     @Insert
     suspend fun insertLike(like: Like)
