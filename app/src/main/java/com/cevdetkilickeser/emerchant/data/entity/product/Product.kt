@@ -8,7 +8,7 @@ data class Product(
     @SerializedName("availabilityStatus")
     val availabilityStatus: String,
     @SerializedName("brand")
-    val brand: String,
+    val brand: String?,
     @SerializedName("category")
     val category: String,
     @SerializedName("description")

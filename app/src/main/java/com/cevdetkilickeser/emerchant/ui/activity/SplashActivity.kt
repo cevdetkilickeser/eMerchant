@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant
+package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import com.cevdetkilickeser.emerchant.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashScreenActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
     private lateinit var viewModel: LoginViewModel
@@ -23,10 +23,10 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel = tempViewModel
 
         val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val username = sharedPref.getString("username", "")
-        val password = sharedPref.getString("password", "")
+        val username = sharedPref.getString("username", "").toString()
+        val password = sharedPref.getString("password", "").toString()
 
-        viewModel.login(username!!, password!!)
+        viewModel.login(username, password)
 
         viewModel.user.observe(this) { user ->
             user?.let {
@@ -37,13 +37,13 @@ class SplashScreenActivity : AppCompatActivity() {
                 editor.putString("userId", user.id.toString())
                 editor.apply()
 
-                val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 intent.putExtra("user", it)
                 startActivity(intent)
                 finish()
 
             } ?: run {
-                val intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

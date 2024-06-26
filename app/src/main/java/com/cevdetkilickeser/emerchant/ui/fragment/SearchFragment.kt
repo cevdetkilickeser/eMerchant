@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cevdetkilickeser.emerchant.databinding.FragmentSearchBinding
-import com.cevdetkilickeser.emerchant.ui.adapter.HomeAdapter
+import com.cevdetkilickeser.emerchant.ui.adapter.ProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +25,8 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val homeAdapter = HomeAdapter(requireActivity(), productList)
-            binding.rvSearch.adapter = homeAdapter
+            val productAdapter = ProductAdapter(requireActivity(), productList)
+            binding.rvSearch.adapter = productAdapter
         }
 
         binding.searchbox.setOnQueryTextListener(object :

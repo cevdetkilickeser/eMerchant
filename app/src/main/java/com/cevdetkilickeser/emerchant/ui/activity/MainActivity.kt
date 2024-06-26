@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant
+package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent
@@ -6,10 +6,13 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
+import com.cevdetkilickeser.emerchant.R
 import com.cevdetkilickeser.emerchant.data.entity.user.User
 import com.cevdetkilickeser.emerchant.databinding.ActivityMainBinding
 import com.cevdetkilickeser.emerchant.databinding.DrawerHeaderBinding
@@ -26,19 +29,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         NavigationUI.setupWithNavController(binding.navigationView, navHostFragment.navController)
 
         val user = intent.getSerializableExtra("user") as User
 
         binding.buttonLogout.setOnClickListener {
             val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putString("username", "")
-            editor.putString("password", "")
-            editor.putString("userId", "")
-            editor.putString("token", "")
-            editor.apply()
+            sharedPref.edit().clear().apply()
 
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -52,6 +51,9 @@ class MainActivity : AppCompatActivity() {
             0,
             0
         )
+        val drawerArrowDrawable = DrawerArrowDrawable(this)
+        drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+        toggle.drawerArrowDrawable = drawerArrowDrawable
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 

@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant
+package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent

@@ -29,6 +29,12 @@ class LikesFragment : Fragment() {
         viewModel.likeList.observe(viewLifecycleOwner) { likeList ->
             val likesAdapter = LikesAdapter(requireActivity(), likeList)
             binding.rvLikes.adapter = likesAdapter
+            if (likeList.isEmpty()) {
+                binding.imageViewEmptyLikes.visibility = View.VISIBLE
+                binding.imageViewEmptyLikes.visibility = View.VISIBLE
+            } else {
+                binding.imageViewEmptyLikes.visibility = View.INVISIBLE
+            }
         }
 
         return binding.root

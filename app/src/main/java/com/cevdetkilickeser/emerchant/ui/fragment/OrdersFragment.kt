@@ -1,5 +1,6 @@
 package com.cevdetkilickeser.emerchant.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,8 @@ class OrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersBinding
     private lateinit var viewModel: OrdersViewModel
+    private lateinit var userId: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +31,16 @@ class OrdersFragment : Fragment() {
             binding.rvOrders.adapter = ordersAdapter
         }
 
+        viewModel.total.observe(viewLifecycleOwner) { total ->
+            if (total > 0) {
+                binding.orderPageTotal.text = "$ " + total
+                binding.cardViewTotal.visibility = View.VISIBLE
+                binding.imageViewEmptyCart.visibility = View.GONE
+            } else {
+                binding.imageViewEmptyCart.visibility = View.VISIBLE
+            }
+        }
+
         return binding.root
     }
 
@@ -36,5 +49,9 @@ class OrdersFragment : Fragment() {
 
         val tempViewModel: OrdersViewModel by viewModels()
         viewModel = tempViewModel
+
+        val sharedPref = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        userId = sharedPref.getString("userId", "").toString()
+        viewModel.getCarts(userId)
     }
 }

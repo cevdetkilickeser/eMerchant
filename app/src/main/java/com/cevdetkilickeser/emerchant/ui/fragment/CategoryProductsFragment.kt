@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.cevdetkilickeser.emerchant.databinding.FragmentCategoryProductsBinding
-import com.cevdetkilickeser.emerchant.ui.adapter.HomeAdapter
+import com.cevdetkilickeser.emerchant.ui.adapter.ProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CategoryProducsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,8 +30,8 @@ class CategoryProductsFragment : Fragment() {
         binding.categoryProductsPageTitle.text = categoryName
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val homeAdapter = HomeAdapter(requireActivity(), productList)
-            binding.rvCategoryProducts.adapter = homeAdapter
+            val productAdapter = ProductAdapter(requireActivity(), productList)
+            binding.rvCategoryProducts.adapter = productAdapter
         }
 
         return binding.root

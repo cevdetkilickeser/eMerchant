@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cevdetkilickeser.emerchant.databinding.FragmentHomeBinding
-import com.cevdetkilickeser.emerchant.ui.adapter.HomeAdapter
+import com.cevdetkilickeser.emerchant.ui.adapter.ProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val homeAdapter = HomeAdapter(requireActivity(), productList)
-            binding.rvHome.adapter = homeAdapter
+            val productAdapter = ProductAdapter(requireActivity(), productList)
+            binding.rvHome.adapter = productAdapter
         }
 
         return binding.root
