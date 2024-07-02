@@ -9,8 +9,8 @@ import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.databinding.CategoryViewBinding
 import com.cevdetkilickeser.emerchant.ui.fragment.CategoriesFragmentDirections
 
-class CategoriesAdapter(private var context: Context, private var categoryList: List<Category>) :
-    RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
+class CategoryAdapter(private val context: Context, private var categoryList: List<Category>) :
+    RecyclerView.Adapter<CategoryAdapter.CategoriesViewHolder>() {
 
 
     inner class CategoriesViewHolder(var binding: CategoryViewBinding) :
@@ -18,7 +18,7 @@ class CategoriesAdapter(private var context: Context, private var categoryList: 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val binding = CategoryViewBinding.inflate(layoutInflater)
+        val binding = CategoryViewBinding.inflate(layoutInflater, parent, false)
         return CategoriesViewHolder(binding)
     }
 

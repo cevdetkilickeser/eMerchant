@@ -30,8 +30,8 @@ class CategoryProductsFragment : Fragment() {
         binding.categoryProductsPageTitle.text = categoryName
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val productAdapter = ProductAdapter(requireActivity(), productList)
-            binding.rvCategoryProducts.adapter = productAdapter
+            val categoryProductAdapter = ProductAdapter(requireActivity(), productList)
+            binding.rvCategoryProducts.adapter = categoryProductAdapter
         }
 
         return binding.root

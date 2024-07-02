@@ -2,8 +2,10 @@ package com.cevdetkilickeser.emerchant.data.datasource
 
 import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
 import com.cevdetkilickeser.emerchant.data.entity.cart.CartRequest
+import com.cevdetkilickeser.emerchant.data.entity.cart.CartRequestProduct
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
+import com.cevdetkilickeser.emerchant.data.entity.order.Order
 import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
 import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
@@ -30,10 +32,10 @@ class DataSource(private val serviceDao: ServiceDao, private val likeDao: LikeDa
             return@withContext serviceDao.getAuthUserProfile(token)
         }
 
-    suspend fun updateProfile(userId: String, updateProfileRequest: UpdateProfileRequest): Profile =
+    suspend fun updateProfile(userId: Int, updateProfileRequest: UpdateProfileRequest): Profile =
         withContext(Dispatchers.IO) {
             return@withContext serviceDao.updateProfile(
-                userId.toInt(), updateProfileRequest
+                userId, updateProfileRequest
             )
         }
 
@@ -57,14 +59,14 @@ class DataSource(private val serviceDao: ServiceDao, private val likeDao: LikeDa
             return@withContext serviceDao.searchProducts(query).products
         }
 
-    suspend fun getCarts(userId: String): List<Cart> =
+    suspend fun getOrders(userId: String): List<Order> =
         withContext(Dispatchers.IO) {
-            return@withContext serviceDao.getCarts(userId).carts
+            return@withContext serviceDao.getOrders(userId).orders
         }
 
-    suspend fun addCart(userId: String, products: List<Product>): Int =
+    suspend fun getCart(userId: Int, cartRequestProducts: List<CartRequestProduct>): Cart =
         withContext(Dispatchers.IO) {
-            return@withContext serviceDao.addCart(CartRequest(userId.toInt(), products)).id
+            return@withContext serviceDao.getCart(CartRequest(userId, cartRequestProducts))
         }
 
     suspend fun getLikes(userId: String): List<Like> =

@@ -12,17 +12,17 @@ import com.cevdetkilickeser.emerchant.databinding.LikeViewBinding
 import com.cevdetkilickeser.emerchant.ui.activity.DetailActivity
 import org.greenrobot.eventbus.EventBus
 
-class LikesAdapter(
+class LikeAdapter(
     private var context: Activity,
     private var likeList: List<Like>
-) : RecyclerView.Adapter<LikesAdapter.LikeViewHolder>() {
+) : RecyclerView.Adapter<LikeAdapter.LikeViewHolder>() {
 
     inner class LikeViewHolder(var binding: LikeViewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikeViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val binding = LikeViewBinding.inflate(layoutInflater)
+        val binding = LikeViewBinding.inflate(layoutInflater, parent, false)
         return LikeViewHolder(binding)
     }
 
@@ -37,7 +37,10 @@ class LikesAdapter(
         holder.binding.apply {
             Glide.with(this.root).load(product.thumbnail).into(this.likeViewImage)
             likeViewTitle.text = product.title
-            likeViewPrice.text = "$ " + product.price
+            likeViewPrice.text = buildString {
+                append("$ ")
+                append(product.price)
+            }
             likeImageViewDelete.setOnClickListener {
                 EventBus.getDefault().post(UnlikeClickEvent(like))
             }

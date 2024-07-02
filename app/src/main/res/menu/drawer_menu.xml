@@ -18,6 +18,10 @@
         android:icon="@drawable/ic_likes"
         android:title="@string/menu_likes" />
     <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/cart"
+        android:title="@string/menu_cart" />
+    <item
         android:id="@+id/ordersFragment"
         android:icon="@drawable/ic_orders"
         android:title="@string/menu_orders" />

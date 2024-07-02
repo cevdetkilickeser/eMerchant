@@ -8,14 +8,14 @@ import com.cevdetkilickeser.emerchant.data.entity.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ReviewViewBinding
 import com.cevdetkilickeser.emerchant.utils.DateConverter
 
-class ReviewAdapter(private var context: Context, private var reviewList: List<Review>) :
+class ReviewAdapter(private val context: Context, private var reviewList: List<Review>) :
     RecyclerView.Adapter<ReviewAdapter.ReviewsViewHolder>() {
     inner class ReviewsViewHolder(val binding: ReviewViewBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewsViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val binding = ReviewViewBinding.inflate(layoutInflater)
+        val binding = ReviewViewBinding.inflate(layoutInflater, parent, false)
         return ReviewsViewHolder(binding)
     }
 

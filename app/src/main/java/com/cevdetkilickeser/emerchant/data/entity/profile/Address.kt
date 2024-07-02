@@ -9,13 +9,13 @@ data class Address(
     @SerializedName("city")
     val city: String,
     @SerializedName("coordinates")
-    val coordinates: Coordinates,
+    val coordinates: Coordinates? = Coordinates(0.0, 0.0),
     @SerializedName("country")
     val country: String,
     @SerializedName("postalCode")
-    val postalCode: String,
+    val postalCode: String? = "00000",
     @SerializedName("state")
     val state: String,
     @SerializedName("stateCode")
-    val stateCode: String
+    val stateCode: String? = "--"
 )

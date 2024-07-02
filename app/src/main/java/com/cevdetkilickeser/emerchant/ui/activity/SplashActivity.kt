@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,8 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModel: LoginViewModel
+    private lateinit var sharedPref: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -24,7 +27,9 @@ class SplashActivity : AppCompatActivity() {
         val tempViewModel: LoginViewModel by viewModels()
         viewModel = tempViewModel
 
-        val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
         val username = sharedPref.getString("username", "").toString()
         val password = sharedPref.getString("password", "").toString()
 
@@ -32,9 +37,6 @@ class SplashActivity : AppCompatActivity() {
 
         viewModel.user.observe(this) { user ->
             user?.let {
-                val sharedPreferences =
-                    this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
                 editor.putString("token", it.token)
                 editor.putString("userId", user.id.toString())
                 editor.apply()

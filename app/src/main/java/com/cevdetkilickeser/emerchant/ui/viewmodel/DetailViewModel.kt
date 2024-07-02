@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
-import com.cevdetkilickeser.emerchant.data.entity.product.Product
 import com.cevdetkilickeser.emerchant.data.repo.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     val like = MutableLiveData<Like>()
-    val addCartId = MutableLiveData<Int>()
+    val isAdded = MutableLiveData<Boolean>()
 
     fun checkLike(userId: String, productId: Int) {
         viewModelScope.launch {
@@ -36,9 +35,10 @@ class DetailViewModel @Inject constructor(private val repository: Repository) : 
         }
     }
 
-    fun addCart(userId: String, product: List<Product>) {
+    fun onClickAddToCart(userId: Int, productId: Int) {
         viewModelScope.launch {
-            addCartId.value = repository.addCart(userId, product)
+            repository.onClickAddToCart(userId, productId)
+            isAdded.value = repository.isAdded
         }
     }
 }

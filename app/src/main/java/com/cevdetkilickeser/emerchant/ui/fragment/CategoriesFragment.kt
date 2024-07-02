@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cevdetkilickeser.emerchant.databinding.FragmentCategoriesBinding
-import com.cevdetkilickeser.emerchant.ui.adapter.CategoriesAdapter
+import com.cevdetkilickeser.emerchant.ui.adapter.CategoryAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,8 +24,8 @@ class CategoriesFragment : Fragment() {
         binding = FragmentCategoriesBinding.inflate(layoutInflater, container, false)
 
         viewModel.caregoryList.observe(viewLifecycleOwner) { caregoryList ->
-            val homeAdapter = CategoriesAdapter(requireContext(), caregoryList)
-            binding.rvCategories.adapter = homeAdapter
+            val categoryAdapter = CategoryAdapter(requireContext(), caregoryList)
+            binding.rvCategories.adapter = categoryAdapter
         }
 
         return binding.root

@@ -7,6 +7,7 @@ import com.cevdetkilickeser.emerchant.retrofit.ApiUtils
 import com.cevdetkilickeser.emerchant.retrofit.ServiceDao
 import com.cevdetkilickeser.emerchant.room.AppDatabase
 import com.cevdetkilickeser.emerchant.room.LikeDao
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +21,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideServiceRepository(dataSource: DataSource): Repository {
-        return Repository(dataSource)
+    fun provideServiceRepository(
+        dataSource: DataSource,
+        firebaseDB: FirebaseFirestore
+    ): Repository {
+        return Repository(dataSource, firebaseDB)
     }
 
     @Provides
@@ -40,5 +44,11 @@ class AppModule {
     @Singleton
     fun provideLikeDao(@ApplicationContext context: Context): LikeDao {
         return AppDatabase.getDatabase(context).getLikeDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }

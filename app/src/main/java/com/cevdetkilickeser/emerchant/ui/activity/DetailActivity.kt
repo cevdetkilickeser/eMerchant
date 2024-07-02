@@ -1,6 +1,7 @@
 package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var like: Like
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel = tempViewModel
 
         val product = intent.getSerializableExtra("product") as Product
-        val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getString("userId", "").toString()
 
         viewModel.checkLike(userId, product.id)
@@ -54,12 +56,20 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.addCartId.observe(this) {
-            Snackbar.make(
-                binding.root,
-                "${product.title} added to cart.\n(Cart Id: $it)",
-                Snackbar.LENGTH_SHORT
-            ).show()
+        viewModel.isAdded.observe(this) {
+            if (it) {
+                Snackbar.make(
+                    binding.root,
+                    "${product.title} has been successfully added to the cart",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    "An error occurred. Please try again",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
 
         binding.detailPageBackButton.setOnClickListener {
@@ -80,7 +90,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.detailPageAddToCartButton.setOnClickListener {
-            viewModel.addCart(userId, listOf(product))
+            viewModel.onClickAddToCart(userId.toInt(), product.id)
         }
 
         product.let {

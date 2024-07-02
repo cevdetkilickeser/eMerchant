@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -34,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
         val tempViewModel: LoginViewModel by viewModels()
         viewModel = tempViewModel
 
-        val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
+        sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
 
         viewModel.user.observe(this) { user ->
             user?.let {
@@ -57,8 +61,6 @@ class LoginActivity : AppCompatActivity() {
     private fun onLoginClick(username: String, password: String) {
         viewModel.login(username, password)
 
-        val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
         editor.putString("username", username)
         editor.putString("password", password)
         editor.apply()

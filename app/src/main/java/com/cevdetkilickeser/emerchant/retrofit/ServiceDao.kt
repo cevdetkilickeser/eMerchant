@@ -2,8 +2,8 @@ package com.cevdetkilickeser.emerchant.retrofit
 
 import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
 import com.cevdetkilickeser.emerchant.data.entity.cart.CartRequest
-import com.cevdetkilickeser.emerchant.data.entity.cart.Carts
 import com.cevdetkilickeser.emerchant.data.entity.category.Category
+import com.cevdetkilickeser.emerchant.data.entity.order.Orders
 import com.cevdetkilickeser.emerchant.data.entity.product.Products
 import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
 import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
@@ -46,11 +46,11 @@ interface ServiceDao {
     suspend fun searchProducts(@Query("q") query: String): Products
 
     @GET("carts/user/{userId}")
-    suspend fun getCarts(@Path("userId") userId: String): Carts
+    suspend fun getOrders(@Path("userId") userId: String): Orders
 
     @Headers("Content-Type: application/json")
     @POST("carts/add")
-    suspend fun addCart(@Body cartRequest: CartRequest): Cart
+    suspend fun getCart(@Body cartRequest: CartRequest): Cart
 
 }
 

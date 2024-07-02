@@ -18,7 +18,7 @@ class ProductAdapter(private var context: Activity, private var productList: Lis
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val binding = ProductViewBinding.inflate(layoutInflater)
+        val binding = ProductViewBinding.inflate(layoutInflater, parent, false)
         return ProductViewHolder(binding)
     }
 

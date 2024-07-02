@@ -25,8 +25,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val productAdapter = ProductAdapter(requireActivity(), productList)
-            binding.rvHome.adapter = productAdapter
+            val homeAdapter = ProductAdapter(requireActivity(), productList)
+            binding.rvHome.adapter = homeAdapter
         }
 
         return binding.root

@@ -91,4 +91,5 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.config)
+    implementation(libs.firebase.firestore)
 }

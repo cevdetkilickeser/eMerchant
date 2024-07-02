@@ -14,17 +14,21 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     val profile = MutableLiveData<Profile>()
-    val updatedProfile = MutableLiveData<Profile>()
+    var isProgress = MutableLiveData<Boolean>()
 
     fun getAuthUserProfile(token: String) {
         viewModelScope.launch {
+            isProgress.value = true
             profile.value = repository.getAuthUserProfile(token)
+            isProgress.value = false
         }
     }
 
-    fun updateProfile(userId: String, updateProfileRequest: UpdateProfileRequest) {
+    fun updateProfile(userId: Int, updateProfileRequest: UpdateProfileRequest) {
         viewModelScope.launch {
-            updatedProfile.value = repository.updateProfile(userId, updateProfileRequest)
+            isProgress.value = true
+            profile.value = repository.updateProfile(userId, updateProfileRequest)
+            isProgress.value = false
         }
     }
 }

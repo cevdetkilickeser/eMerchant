@@ -2,6 +2,7 @@ package com.cevdetkilickeser.emerchant.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import com.cevdetkilickeser.emerchant.data.entity.user.User
 import com.cevdetkilickeser.emerchant.databinding.ActivityMainBinding
 import com.cevdetkilickeser.emerchant.databinding.DrawerHeaderBinding
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.ConfigUpdate
 import com.google.firebase.remoteconfig.ConfigUpdateListener
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -33,20 +35,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var headerBinding: DrawerHeaderBinding
     private lateinit var remoteConfig: FirebaseRemoteConfig
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        FirebaseApp.initializeApp(this)
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         NavigationUI.setupWithNavController(binding.navigationView, navHostFragment.navController)
 
         val user = intent.getSerializableExtra("user") as User
+        sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
         binding.buttonLogout.setOnClickListener {
-            val sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             sharedPref.edit().clear().apply()
 
             val intent = Intent(this@MainActivity, LoginActivity::class.java)

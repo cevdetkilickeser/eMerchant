@@ -7,6 +7,23 @@
     tools:context=".ui.fragment.OrdersFragment">
 
     <TextView
+        android:id="@+id/noOrderText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/no_order"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rvOrders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvOrders" />
+
+    <TextView
         android:id="@+id/ordersPageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,70 +39,12 @@
         android:id="@+id/rvOrders"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="8dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewTotal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ordersPageTitle"
-        app:spanCount="1" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewTotal"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:visibility="invisible"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="5dp"
+        android:layout_marginTop="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_rectangle"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/orderPageTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:text="$"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/buttonApproveOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="15dp"
-                android:layout_weight="1"
-                android:text="@string/approve_order" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/imageViewEmptyCart"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/img_emptycart"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewTotal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/rvOrders"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rvOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/ordersPageTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

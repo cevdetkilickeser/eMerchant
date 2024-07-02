@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,110 +7,113 @@
     android:paddingEnd="8dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cartProductViewCard"
-        android:layout_width="0dp"
+        android:id="@+id/cardViewCartProduct"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:backgroundTint="@color/gray"
-        android:elevation="5dp"
-        app:cardCornerRadius="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/gray">
 
             <ImageView
-                android:id="@+id/cartPrductViewImage"
+                android:id="@+id/imageViewCartProductView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                app:srcCompat="@drawable/app_icon_foreground" />
 
             <TextView
-                android:id="@+id/cartPrductViewTitle"
+                android:id="@+id/cartProductTitle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:ellipsize="none"
-                android:maxLines="2"
-                android:singleLine="false"
-                app:layout_constraintBottom_toTopOf="@+id/cartPrductViewPrice"
-                app:layout_constraintEnd_toEndOf="@+id/view"
-                app:layout_constraintStart_toEndOf="@+id/cartPrductViewImage"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cartPrductViewPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintStart_toStartOf="@+id/cartPrductViewTitle"
-                app:layout_constraintTop_toBottomOf="@+id/cartPrductViewTitle" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/shape_rectangle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/cartPrductViewImage"
-                app:layout_constraintTop_toBottomOf="@+id/cartPrductViewImage" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/quantity"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
-
-            <TextView
-                android:id="@+id/cartPrductViewQuantity"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Essence Mascara Lash Princess"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toTopOf="@+id/textView3" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCartProductView"
+                app:layout_constraintTop_toTopOf="@+id/imageViewCartProductView" />
 
             <TextView
-                android:id="@+id/cartPrductViewTotal"
+                android:id="@+id/cartProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:text="$ 9.99"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/textView3" />
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+                app:layout_constraintStart_toStartOf="@+id/cartProductTitle"
+                app:layout_constraintTop_toBottomOf="@+id/cartProductTitle"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewCartProductView"
+                app:layout_constraintStart_toStartOf="@+id/cartProductPrice">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/buttonDecrease"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:backgroundTint="@color/black"
+                    android:text="-"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/cartProductQuantity"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="141"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/buttonIncrease"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:backgroundTint="@color/black"
+                    android:text="+"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/cartProductTotal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/cart_product_total"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toStartOf="@+id/cartPrductViewTotal"
-                app:layout_constraintTop_toTopOf="@+id/textView3" />
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="$ 1234.12"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
+                app:layout_constraintEnd_toEndOf="@+id/cartProductTitle"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout7" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarCartProduct"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
