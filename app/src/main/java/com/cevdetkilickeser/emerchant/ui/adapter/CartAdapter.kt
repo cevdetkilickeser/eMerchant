@@ -47,15 +47,9 @@ class CartAdapter(
             }
             buttonIncrease.setOnClickListener {
                 EventBus.getDefault().post(UpdateQuantityClickEvent(userId, cartProduct.id, true))
-//                var quantity = cartProductQuantity.text.toString().toInt()
-//                quantity++
-//                cartProductQuantity.text = quantity.toString()
             }
             buttonDecrease.setOnClickListener {
                 EventBus.getDefault().post(UpdateQuantityClickEvent(userId, cartProduct.id, false))
-//                var quantity = cartProductQuantity.text.toString().toInt()
-//                quantity--
-//                cartProductQuantity.text = quantity.toString()
             }
         }
     }

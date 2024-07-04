@@ -70,9 +70,4 @@ class CartFragment : Fragment() {
         userId = sharedPref.getString("userId", "").toString().toInt()
         viewModel.getCart(userId)
     }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getCart(userId)
-    }
 }

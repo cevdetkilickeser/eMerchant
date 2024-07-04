@@ -59,6 +59,7 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
 
     private suspend fun getFirebaseCartProducts(userId: Int) {
         cartRequestProducts.clear()
+        val tempCartRequestProduct = mutableListOf<CartRequestProduct>()
         cartRef = firebaseDB.collection("cart")
         firebaseDB.collection("cart")
         val querySnapshot = cartRef
@@ -70,8 +71,9 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
                 val productId = document.getLong("productId")?.toInt() ?: 0
                 val quantity = document.getLong("quantity")?.toInt() ?: 0
                 val cartProduct = CartRequestProduct(productId, quantity)
-                cartRequestProducts.add(cartProduct)
+                tempCartRequestProduct.add(cartProduct)
             }
+            cartRequestProducts.addAllAbsent(tempCartRequestProduct.sortedBy { it.productId })
         }
     }
 
