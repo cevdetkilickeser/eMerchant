@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cevdetkilickeser.emerchant.data.entity.cart.CartProduct
 import com.cevdetkilickeser.emerchant.databinding.CartProductViewBinding
 
-class CartAdapter(
+class CartProductAdapter(
     private var cartProducts: List<CartProduct>,
     private val onClickButtonIncrease: (Int, Boolean) -> Unit,
     private val onClickButtonDecrease: (Int, Boolean) -> Unit

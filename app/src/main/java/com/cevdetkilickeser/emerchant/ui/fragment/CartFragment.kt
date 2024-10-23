@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cevdetkilickeser.emerchant.databinding.FragmentCartBinding
-import com.cevdetkilickeser.emerchant.ui.adapter.CartAdapter
+import com.cevdetkilickeser.emerchant.ui.adapter.CartProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -35,9 +35,13 @@ class CartFragment : Fragment() {
                 append(String.format(Locale.US, "%.2f", viewModel.cartTotal))
             }
 
-            val cartAdapter =
-                CartAdapter(cartProductList, ::onClickButtonIncrease, ::onClickButtonDecrease)
-            binding.rvCart.adapter = cartAdapter
+            val cartProductAdapter =
+                CartProductAdapter(
+                    cartProductList,
+                    ::onClickButtonIncrease,
+                    ::onClickButtonDecrease
+                )
+            binding.rvCart.adapter = cartProductAdapter
         }
 
         viewModel.isEmptyCart.observe(viewLifecycleOwner) { isEmptyCart ->
