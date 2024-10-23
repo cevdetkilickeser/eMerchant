@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
         viewModel.isProgress.observe(viewLifecycleOwner) { isProgress ->
@@ -59,9 +59,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.updateProfile.setOnClickListener {
-            binding.profileInfoLayout.visibility = View.GONE
-            binding.profileUpdateLayout.visibility = View.VISIBLE
-            binding.apply {
+            with(binding) {
+                profileInfoLayout.visibility = View.GONE
+                profileUpdateLayout.visibility = View.VISIBLE
                 firstnameNew.setText(profile.firstName)
                 lastnameNew.setText(profile.lastName)
                 ageNew.setText(profile.age.toString())
@@ -121,7 +121,7 @@ class ProfileFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback = object : OnBackPressedCallback(
-            true // default to enabled
+            true
         ) {
             override fun handleOnBackPressed() {
                 if (binding.profileUpdateLayout.visibility == View.VISIBLE) {
@@ -134,7 +134,7 @@ class ProfileFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(
-            this, // LifecycleOwner
+            this,
             callback
         )
     }

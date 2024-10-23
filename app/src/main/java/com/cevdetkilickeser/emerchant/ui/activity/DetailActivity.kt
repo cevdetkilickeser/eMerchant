@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModels()
     private lateinit var like: Like
     private lateinit var sharedPref: SharedPreferences
 
@@ -30,9 +30,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val tempViewModel: DetailViewModel by viewModels()
-        viewModel = tempViewModel
 
         val product = intent.getSerializableExtra("product") as Product
         sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
@@ -94,7 +91,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         product.let {
-            binding.apply {
+            with(binding) {
                 Glide.with(this.root).load(it.thumbnail).into(this.detilPageImage)
                 detailPageTitle.text = it.title
                 detailPageDescription.text = it.description
