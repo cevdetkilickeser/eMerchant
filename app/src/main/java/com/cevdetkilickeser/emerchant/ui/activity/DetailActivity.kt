@@ -14,6 +14,7 @@ import com.cevdetkilickeser.emerchant.data.entity.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ActivityDetailBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.ReviewAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.DetailViewModel
+import com.cevdetkilickeser.emerchant.utils.parcelable
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val product = intent.getSerializableExtra("product") as Product
+        val product = intent.parcelable<Product>("product")!!
         sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getString("userId", "").toString()
 
@@ -44,29 +45,14 @@ class DetailActivity : AppCompatActivity() {
 
             } ?: run {
                 binding.detailPageCheckbox.isChecked = false
-                if (product.brand != null) {
-                    this.like = Like(0, userId, product)
-                } else {
-                    val defaultProduct = product.copy(brand = "Unknown")
-                    this.like = Like(0, userId, defaultProduct)
-                }
+                this.like = Like(0, userId, product)
             }
         }
 
-        viewModel.isAdded.observe(this) {
-            if (it) {
-                Snackbar.make(
-                    binding.root,
-                    "${product.title} has been successfully added to the cart",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            } else {
-                Snackbar.make(
-                    binding.root,
-                    "An error occurred. Please try again",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+        setViewValues(product)
+
+        viewModel.isAdded.observe(this) { isAdded ->
+            showSnackBar(product, isAdded)
         }
 
         binding.detailPageBackButton.setOnClickListener {
@@ -74,11 +60,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.detailPageCheckbox.setOnClickListener {
-            if (binding.detailPageCheckbox.isChecked) {
-                viewModel.insertLike(like)
-            } else {
-                viewModel.deleteLike(like)
-            }
+            onClickCheckBox()
         }
 
         binding.detailPageReviews.setOnClickListener {
@@ -89,24 +71,24 @@ class DetailActivity : AppCompatActivity() {
         binding.detailPageAddToCartButton.setOnClickListener {
             viewModel.onClickAddToCart(userId.toInt(), product.id)
         }
+    }
 
-        product.let {
-            with(binding) {
-                Glide.with(this.root).load(it.thumbnail).into(this.detilPageImage)
-                detailPageTitle.text = it.title
-                detailPageDescription.text = it.description
-                detailPageRating.text = it.rating.toString()
-                detailPageBrand.text = it.brand
-                detailPageWarranty.text = it.warrantyInformation
-                detailPageShipping.text = it.shippingInformation
-                detailPageAvailibility.text = it.availabilityStatus
-                detailPageReturn.text = it.returnPolicy
-                detailPageWeight.text = it.weight.toString()
-                detailPageWidth.text = it.dimensions.width.toString()
-                detailPageHeight.text = it.dimensions.height.toString()
-                detailPageDepth.text = it.dimensions.depth.toString()
-                detailPagePrice.text = "$ " + it.price.toString()
-            }
+    private fun setViewValues(product: Product) {
+        with(binding) {
+            Glide.with(this.root).load(product.thumbnail).into(this.detilPageImage)
+            detailPageTitle.text = product.title
+            detailPageDescription.text = product.description
+            detailPageRating.text = product.rating.toString()
+            detailPageBrand.text = product.brand
+            detailPageWarranty.text = product.warrantyInformation
+            detailPageShipping.text = product.shippingInformation
+            detailPageAvailibility.text = product.availabilityStatus
+            detailPageReturn.text = product.returnPolicy
+            detailPageWeight.text = product.weight.toString()
+            detailPageWidth.text = product.dimensions.width.toString()
+            detailPageHeight.text = product.dimensions.height.toString()
+            detailPageDepth.text = product.dimensions.depth.toString()
+            detailPagePrice.text = "$ " + product.price.toString()
         }
     }
 
@@ -120,5 +102,29 @@ class DetailActivity : AppCompatActivity() {
         recyclerViewReviews.adapter = ReviewAdapter(reviews)
 
         bottomSheetDialog.show()
+    }
+
+    private fun showSnackBar(product: Product, isAdded: Boolean) {
+        if (isAdded) {
+            Snackbar.make(
+                binding.root,
+                "${product.title} has been successfully added to the cart",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else {
+            Snackbar.make(
+                binding.root,
+                "An error occurred. Please try again",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun onClickCheckBox() {
+        if (binding.detailPageCheckbox.isChecked) {
+            viewModel.insertLike(like)
+        } else {
+            viewModel.deleteLike(like)
+        }
     }
 }
