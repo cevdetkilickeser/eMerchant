@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartProduct
 import com.cevdetkilickeser.emerchant.databinding.FragmentCartBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.CartAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CartViewModel
@@ -19,7 +18,7 @@ import java.util.Locale
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
-    private lateinit var viewModel: CartViewModel
+    private val viewModel: CartViewModel by viewModels()
     private lateinit var sharedPref: SharedPreferences
     private var userId = 0
 
@@ -27,34 +26,26 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCartBinding.inflate(layoutInflater, container, false)
 
-        viewModel.cart.observe(viewLifecycleOwner) { cart ->
-            var cartProducts = listOf<CartProduct>()
-            cart?.let {
-                cartProducts = it.cartProducts
-                binding.cartProductsTotal.text = buildString {
-                    append("$ ")
-                    append(String.format(Locale.US, "%.2f", it.total))
-                }
-                binding.imageViewEmptyCart.visibility = View.GONE
-                binding.cardViewCartTotal.visibility = View.VISIBLE
-            } ?: run {
-                cartProducts = emptyList()
-                binding.imageViewEmptyCart.visibility = View.VISIBLE
-                binding.cardViewCartTotal.visibility = View.GONE
+        viewModel.cartProductList.observe(viewLifecycleOwner) { cartProductList ->
+            binding.cartProductsTotal.text = buildString {
+                append("$ ")
+                append(String.format(Locale.US, "%.2f", viewModel.cartTotal))
             }
-            val cartAdapter = CartAdapter(requireContext(), userId, cartProducts)
+
+            val cartAdapter =
+                CartAdapter(cartProductList, ::onClickButtonIncrease, ::onClickButtonDecrease)
             binding.rvCart.adapter = cartAdapter
         }
 
+        viewModel.isEmptyCart.observe(viewLifecycleOwner) { isEmptyCart ->
+            showEmptyCart(isEmptyCart)
+        }
+
         viewModel.isProgress.observe(viewLifecycleOwner) { isProgress ->
-            if (isProgress) {
-                binding.progressBarCart.visibility = View.VISIBLE
-            } else {
-                binding.progressBarCart.visibility = View.GONE
-            }
+            showProgress(isProgress)
         }
 
         return binding.root
@@ -63,11 +54,38 @@ class CartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel: CartViewModel by viewModels()
-        viewModel = tempViewModel
-
         sharedPref = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userId = sharedPref.getString("userId", "").toString().toInt()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getCart(userId)
+    }
+
+    private fun onClickButtonIncrease(cartProductId: Int, updateUp: Boolean) {
+        viewModel.updateCartProductQuantity(userId, cartProductId, updateUp)
+    }
+
+    private fun onClickButtonDecrease(cartProductId: Int, updateUp: Boolean) {
+        viewModel.updateCartProductQuantity(userId, cartProductId, updateUp)
+    }
+
+    private fun showEmptyCart(isEmptyCart: Boolean) {
+        if (isEmptyCart) {
+            binding.imageViewEmptyCart.visibility = View.VISIBLE
+            binding.cardViewCartTotal.visibility = View.GONE
+        } else {
+            binding.imageViewEmptyCart.visibility = View.GONE
+            binding.cardViewCartTotal.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showProgress(isProgress: Boolean) {
+        if (isProgress) {
+            binding.progressBarCart.visibility = View.VISIBLE
+        } else {
+            binding.progressBarCart.visibility = View.GONE
+        }
     }
 }
