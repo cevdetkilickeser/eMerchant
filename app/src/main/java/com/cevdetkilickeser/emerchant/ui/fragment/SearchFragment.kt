@@ -1,5 +1,6 @@
 package com.cevdetkilickeser.emerchant.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cevdetkilickeser.emerchant.databinding.FragmentSearchBinding
+import com.cevdetkilickeser.emerchant.ui.activity.DetailActivity
 import com.cevdetkilickeser.emerchant.ui.adapter.ProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,11 +23,15 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         viewModel.productList.observe(viewLifecycleOwner) { productList ->
-            val productAdapter = ProductAdapter(requireActivity(), productList)
+            val productAdapter = ProductAdapter(productList) { product ->
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("product", product)
+                requireActivity().startActivity(intent)
+            }
             binding.rvSearch.adapter = productAdapter
         }
 
