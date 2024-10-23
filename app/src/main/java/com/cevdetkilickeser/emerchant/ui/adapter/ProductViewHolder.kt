@@ -9,7 +9,7 @@ class ProductViewHolder(var binding: ProductViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(product: Product, onClickProduct: (Product) -> Unit) {
-        binding.apply {
+        with(binding) {
             Glide.with(this.root).load(product.thumbnail).into(this.productViewImage)
             productViewTitle.text = product.title
             productViewPrice.text = product.price.toString()

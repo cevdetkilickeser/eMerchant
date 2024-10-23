@@ -11,7 +11,7 @@ class LikeViewHolder(var binding: LikeViewBinding) : RecyclerView.ViewHolder(bin
     fun bind(like: Like, onClickLikeCard: (Like) -> Unit, onClickDeleteLikeButton: (Like) -> Unit) {
 
         val product = like.product
-        binding.apply {
+        with(binding) {
             Glide.with(this.root).load(product.thumbnail).into(this.likeViewImage)
             likeViewTitle.text = product.title
             likeViewPrice.text = buildString {

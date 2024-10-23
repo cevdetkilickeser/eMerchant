@@ -7,7 +7,7 @@ import com.cevdetkilickeser.emerchant.databinding.CategoryViewBinding
 class CategoryViewHolder(var binding: CategoryViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(category: Category, onClickCategory: (Category) -> Unit) {
-        binding.apply {
+        with(binding) {
             categoryViewName.text = category.name
             categoryViewCard.setOnClickListener {
                 onClickCategory.invoke(category)

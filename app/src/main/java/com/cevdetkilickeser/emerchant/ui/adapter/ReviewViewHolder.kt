@@ -8,7 +8,7 @@ import com.cevdetkilickeser.emerchant.utils.DateConverter
 class ReviewViewHolder(val binding: ReviewViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(review: Review) {
-        binding.apply {
+        with(binding) {
             reviewerName.text = review.reviewerName
             reviewerRate.text = review.rating.toString()
             reviewerComent.text = review.comment

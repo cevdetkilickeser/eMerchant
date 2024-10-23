@@ -13,7 +13,7 @@ class CartProductViewHolder(var binding: CartProductViewBinding) :
         onClickButtonIncrease: (Int, Boolean) -> Unit,
         onClickButtonDecrease: (Int, Boolean) -> Unit
     ) {
-        binding.apply {
+        with(binding) {
             Glide.with(this.root).load(cartProduct.thumbnail).into(this.imageViewCartProductView)
             cartProductTitle.text = cartProduct.title
             cartProductPrice.text = buildString {
