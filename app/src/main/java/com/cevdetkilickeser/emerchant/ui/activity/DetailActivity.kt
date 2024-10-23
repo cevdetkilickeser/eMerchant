@@ -120,7 +120,7 @@ class DetailActivity : AppCompatActivity() {
 
         val recyclerViewReviews =
             bottomSheetView.findViewById<RecyclerView>(R.id.recyclerViewReviews)
-        recyclerViewReviews.adapter = ReviewAdapter(this, reviews)
+        recyclerViewReviews.adapter = ReviewAdapter(reviews)
 
         bottomSheetDialog.show()
     }
