@@ -21,10 +21,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var viewModel: ProfileViewModel
+    private val viewModel: ProfileViewModel by viewModels()
     private lateinit var sharedPref: SharedPreferences
     private lateinit var profile: Profile
-    var userId = 0
+    private var userId = 0
+    private var token = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,16 +33,12 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
         viewModel.isProgress.observe(viewLifecycleOwner) { isProgress ->
-            if (isProgress) {
-                binding.progressBarProfile.visibility = View.VISIBLE
-            } else {
-                binding.progressBarProfile.visibility = View.GONE
-            }
+            showProgressBar(isProgress)
         }
 
         viewModel.profile.observe(viewLifecycleOwner) { profile ->
             this.profile = profile
-            binding.apply {
+            with(binding) {
                 Glide.with(this.root).load(profile.image).into(this.imageViewProfile)
                 firstname.text = profile.firstName
                 lastname.text = profile.lastName
@@ -109,12 +106,13 @@ class ProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel: ProfileViewModel by viewModels()
-        viewModel = tempViewModel
-
         sharedPref = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userId = sharedPref.getString("userId", "").toString().toInt()
-        val token = sharedPref.getString("token", "").toString()
+        token = sharedPref.getString("token", "").toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getAuthUserProfile(token)
     }
 
@@ -137,5 +135,13 @@ class ProfileFragment : Fragment() {
             this,
             callback
         )
+    }
+
+    private fun showProgressBar(isProgress: Boolean) {
+        if (isProgress) {
+            binding.progressBarProfile.visibility = View.VISIBLE
+        } else {
+            binding.progressBarProfile.visibility = View.GONE
+        }
     }
 }
