@@ -1,5 +1,6 @@
 package com.cevdetkilickeser.emerchant.ui.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoriesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    val caregoryList = MutableLiveData<List<Category>>()
+    private val _categoryList = MutableLiveData<List<Category>>()
+    val categoryList: LiveData<List<Category>> = _categoryList
 
     init {
         getCategories()
@@ -20,7 +22,7 @@ class CategoriesViewModel @Inject constructor(private val repository: Repository
 
     private fun getCategories() {
         viewModelScope.launch {
-            caregoryList.value = repository.getCategories()
+            _categoryList.value = repository.getCategories()
         }
     }
 }
