@@ -1,9 +1,11 @@
 package com.cevdetkilickeser.emerchant.data.entity.product
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Meta(
     @SerializedName("barcode")
     val barcode: String,
@@ -13,4 +15,4 @@ data class Meta(
     val qrCode: String,
     @SerializedName("updatedAt")
     val updatedAt: String
-) : Serializable
+) : Parcelable

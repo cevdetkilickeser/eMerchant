@@ -1,14 +1,16 @@
 package com.cevdetkilickeser.emerchant.data.entity.product
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
     @SerializedName("availabilityStatus")
     val availabilityStatus: String,
     @SerializedName("brand")
-    val brand: String?,
+    val brand: String? = "Unknown",
     @SerializedName("category")
     val category: String,
     @SerializedName("description")
@@ -49,4 +51,4 @@ data class Product(
     val warrantyInformation: String,
     @SerializedName("weight")
     val weight: Int
-) : Serializable
+) : Parcelable
