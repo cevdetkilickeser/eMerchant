@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.cevdetkilickeser.emerchant.data.entity.order.Order
 import com.cevdetkilickeser.emerchant.databinding.FragmentOrdersBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.OrderAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.OrdersViewModel
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersBinding
-    private lateinit var viewModel: OrdersViewModel
+    private val viewModel: OrdersViewModel by viewModels()
     private lateinit var userId: String
     private lateinit var sharedPref: SharedPreferences
 
@@ -25,16 +26,12 @@ class OrdersFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOrdersBinding.inflate(layoutInflater, container, false)
 
         viewModel.orderList.observe(viewLifecycleOwner) { orderList ->
-            if (orderList.isEmpty()) {
-                binding.noOrderText.visibility = View.VISIBLE
-            } else {
-                binding.noOrderText.visibility = View.GONE
-            }
-            val orderAdapter = OrderAdapter(requireContext(), orderList)
+            showNoOrder(orderList)
+            val orderAdapter = OrderAdapter(orderList)
             binding.rvOrders.adapter = orderAdapter
         }
         return binding.root
@@ -43,11 +40,20 @@ class OrdersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel: OrdersViewModel by viewModels()
-        viewModel = tempViewModel
-
         sharedPref = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         userId = sharedPref.getString("userId", "").toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getCarts(userId)
+    }
+
+    private fun showNoOrder(orderList: List<Order>) {
+        if (orderList.isEmpty()) {
+            binding.noOrderText.visibility = View.VISIBLE
+        } else {
+            binding.noOrderText.visibility = View.GONE
+        }
     }
 }
