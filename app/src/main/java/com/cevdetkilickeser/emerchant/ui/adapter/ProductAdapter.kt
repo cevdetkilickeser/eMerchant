@@ -3,7 +3,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.product.Product
+import com.cevdetkilickeser.emerchant.data.model.product.Product
 import com.cevdetkilickeser.emerchant.databinding.ProductViewBinding
 
 class ProductAdapter(

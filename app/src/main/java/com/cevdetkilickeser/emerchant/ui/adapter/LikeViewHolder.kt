@@ -2,7 +2,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.cevdetkilickeser.emerchant.data.entity.like.Like
+import com.cevdetkilickeser.emerchant.data.model.like.Like
 import com.cevdetkilickeser.emerchant.databinding.LikeViewBinding
 import com.cevdetkilickeser.emerchant.utils.formatPrice
 

@@ -3,7 +3,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.like.Like
+import com.cevdetkilickeser.emerchant.data.model.like.Like
 import com.cevdetkilickeser.emerchant.databinding.LikeViewBinding
 
 class LikeAdapter(

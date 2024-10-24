@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cevdetkilickeser.emerchant.data.entity.like.Like
+import com.cevdetkilickeser.emerchant.data.model.like.Like
 import com.cevdetkilickeser.emerchant.databinding.FragmentLikesBinding
 import com.cevdetkilickeser.emerchant.ui.activity.DetailActivity
 import com.cevdetkilickeser.emerchant.ui.adapter.LikeAdapter

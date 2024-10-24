@@ -1,9 +1,9 @@
 package com.cevdetkilickeser.emerchant.utils
 
 import androidx.room.TypeConverter
-import com.cevdetkilickeser.emerchant.data.entity.product.Dimensions
-import com.cevdetkilickeser.emerchant.data.entity.product.Meta
-import com.cevdetkilickeser.emerchant.data.entity.product.Review
+import com.cevdetkilickeser.emerchant.data.model.product.Dimensions
+import com.cevdetkilickeser.emerchant.data.model.product.Meta
+import com.cevdetkilickeser.emerchant.data.model.product.Review
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

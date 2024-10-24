@@ -1,15 +1,15 @@
 package com.cevdetkilickeser.emerchant.data.repo
 
 import com.cevdetkilickeser.emerchant.data.datasource.DataSource
-import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartRequestProduct
-import com.cevdetkilickeser.emerchant.data.entity.category.Category
-import com.cevdetkilickeser.emerchant.data.entity.like.Like
-import com.cevdetkilickeser.emerchant.data.entity.order.Order
-import com.cevdetkilickeser.emerchant.data.entity.product.Product
-import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
-import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
-import com.cevdetkilickeser.emerchant.data.entity.user.User
+import com.cevdetkilickeser.emerchant.data.model.cart.Cart
+import com.cevdetkilickeser.emerchant.data.model.cart.CartRequestProduct
+import com.cevdetkilickeser.emerchant.data.model.category.Category
+import com.cevdetkilickeser.emerchant.data.model.like.Like
+import com.cevdetkilickeser.emerchant.data.model.order.Order
+import com.cevdetkilickeser.emerchant.data.model.product.Product
+import com.cevdetkilickeser.emerchant.data.model.profile.Profile
+import com.cevdetkilickeser.emerchant.data.model.profile.UpdateProfileRequest
+import com.cevdetkilickeser.emerchant.data.model.user.User
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot

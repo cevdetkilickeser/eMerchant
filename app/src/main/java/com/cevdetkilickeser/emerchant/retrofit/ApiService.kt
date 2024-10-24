@@ -1,14 +1,14 @@
 package com.cevdetkilickeser.emerchant.retrofit
 
-import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartRequest
-import com.cevdetkilickeser.emerchant.data.entity.category.Category
-import com.cevdetkilickeser.emerchant.data.entity.order.Orders
-import com.cevdetkilickeser.emerchant.data.entity.product.Products
-import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
-import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
-import com.cevdetkilickeser.emerchant.data.entity.user.LoginRequest
-import com.cevdetkilickeser.emerchant.data.entity.user.User
+import com.cevdetkilickeser.emerchant.data.model.cart.Cart
+import com.cevdetkilickeser.emerchant.data.model.cart.CartRequest
+import com.cevdetkilickeser.emerchant.data.model.category.Category
+import com.cevdetkilickeser.emerchant.data.model.order.Orders
+import com.cevdetkilickeser.emerchant.data.model.product.Products
+import com.cevdetkilickeser.emerchant.data.model.profile.Profile
+import com.cevdetkilickeser.emerchant.data.model.profile.UpdateProfileRequest
+import com.cevdetkilickeser.emerchant.data.model.user.LoginRequest
+import com.cevdetkilickeser.emerchant.data.model.user.User
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header

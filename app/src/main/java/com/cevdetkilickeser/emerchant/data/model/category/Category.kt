@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant.data.entity.category
+package com.cevdetkilickeser.emerchant.data.model.category
 
 
 import com.google.gson.annotations.SerializedName

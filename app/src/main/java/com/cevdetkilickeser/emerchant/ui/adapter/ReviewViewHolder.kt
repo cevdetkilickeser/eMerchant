@@ -1,7 +1,7 @@
 package com.cevdetkilickeser.emerchant.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.product.Review
+import com.cevdetkilickeser.emerchant.data.model.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ReviewViewBinding
 import com.cevdetkilickeser.emerchant.utils.DateConverter
 

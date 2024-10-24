@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartProduct
+import com.cevdetkilickeser.emerchant.data.model.cart.CartProduct
 import com.cevdetkilickeser.emerchant.databinding.FragmentCartBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.CartProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CartViewModel

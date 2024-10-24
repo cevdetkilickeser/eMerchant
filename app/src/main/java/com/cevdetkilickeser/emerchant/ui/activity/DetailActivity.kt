@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cevdetkilickeser.emerchant.R
-import com.cevdetkilickeser.emerchant.data.entity.like.Like
-import com.cevdetkilickeser.emerchant.data.entity.product.Product
-import com.cevdetkilickeser.emerchant.data.entity.product.Review
+import com.cevdetkilickeser.emerchant.data.model.like.Like
+import com.cevdetkilickeser.emerchant.data.model.product.Product
+import com.cevdetkilickeser.emerchant.data.model.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ActivityDetailBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.ReviewAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.DetailViewModel

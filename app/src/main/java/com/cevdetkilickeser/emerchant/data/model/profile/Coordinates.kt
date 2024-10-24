@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant.data.entity.profile
+package com.cevdetkilickeser.emerchant.data.model.profile
 
 
 import com.google.gson.annotations.SerializedName

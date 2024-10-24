@@ -10,9 +10,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.cevdetkilickeser.emerchant.data.entity.profile.Address
-import com.cevdetkilickeser.emerchant.data.entity.profile.Profile
-import com.cevdetkilickeser.emerchant.data.entity.profile.UpdateProfileRequest
+import com.cevdetkilickeser.emerchant.data.model.profile.Address
+import com.cevdetkilickeser.emerchant.data.model.profile.Profile
+import com.cevdetkilickeser.emerchant.data.model.profile.UpdateProfileRequest
 import com.cevdetkilickeser.emerchant.databinding.FragmentProfileBinding
 import com.cevdetkilickeser.emerchant.ui.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint

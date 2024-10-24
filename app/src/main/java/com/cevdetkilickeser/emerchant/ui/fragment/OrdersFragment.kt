@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cevdetkilickeser.emerchant.data.entity.order.Order
+import com.cevdetkilickeser.emerchant.data.model.order.Order
 import com.cevdetkilickeser.emerchant.databinding.FragmentOrdersBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.OrderAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.OrdersViewModel

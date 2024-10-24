@@ -1,7 +1,7 @@
 package com.cevdetkilickeser.emerchant.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.order.Order
+import com.cevdetkilickeser.emerchant.data.model.order.Order
 import com.cevdetkilickeser.emerchant.databinding.OrderViewBinding
 import com.cevdetkilickeser.emerchant.utils.formatPrice
 

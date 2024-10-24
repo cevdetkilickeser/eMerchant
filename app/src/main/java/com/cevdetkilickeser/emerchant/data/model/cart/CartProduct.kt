@@ -1,9 +1,9 @@
-package com.cevdetkilickeser.emerchant.data.entity.order
+package com.cevdetkilickeser.emerchant.data.model.cart
 
 
 import com.google.gson.annotations.SerializedName
 
-data class OrderProduct(
+data class CartProduct(
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
@@ -16,8 +16,8 @@ data class OrderProduct(
     val total: Double,
     @SerializedName("discountPercentage")
     val discountPercentage: Double,
-    @SerializedName("discountedTotal")
-    val discountedTotal: Double,
+    @SerializedName("discountedPrice")
+    val discountedPrice: Int,
     @SerializedName("thumbnail")
     val thumbnail: String
 )

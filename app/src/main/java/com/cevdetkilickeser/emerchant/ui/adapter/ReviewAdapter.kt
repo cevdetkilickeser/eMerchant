@@ -3,7 +3,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.product.Review
+import com.cevdetkilickeser.emerchant.data.model.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ReviewViewBinding
 
 class ReviewAdapter(private var reviewList: List<Review>) :

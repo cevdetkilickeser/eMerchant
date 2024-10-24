@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cevdetkilickeser.emerchant.data.entity.cart.Cart
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartProduct
+import com.cevdetkilickeser.emerchant.data.model.cart.Cart
+import com.cevdetkilickeser.emerchant.data.model.cart.CartProduct
 import com.cevdetkilickeser.emerchant.data.repo.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

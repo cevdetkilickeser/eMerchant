@@ -1,7 +1,7 @@
 package com.cevdetkilickeser.emerchant.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.category.Category
+import com.cevdetkilickeser.emerchant.data.model.category.Category
 import com.cevdetkilickeser.emerchant.databinding.CategoryViewBinding
 
 class CategoryViewHolder(var binding: CategoryViewBinding) :

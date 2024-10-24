@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant.data.entity.product
+package com.cevdetkilickeser.emerchant.data.model.product
 
 
 import android.os.Parcelable

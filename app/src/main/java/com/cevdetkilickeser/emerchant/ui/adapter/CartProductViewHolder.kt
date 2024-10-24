@@ -2,7 +2,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.cevdetkilickeser.emerchant.data.entity.cart.CartProduct
+import com.cevdetkilickeser.emerchant.data.model.cart.CartProduct
 import com.cevdetkilickeser.emerchant.databinding.CartProductViewBinding
 import com.cevdetkilickeser.emerchant.utils.formatPrice
 

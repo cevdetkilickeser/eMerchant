@@ -3,7 +3,7 @@ package com.cevdetkilickeser.emerchant.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cevdetkilickeser.emerchant.data.entity.order.Order
+import com.cevdetkilickeser.emerchant.data.model.order.Order
 import com.cevdetkilickeser.emerchant.databinding.OrderViewBinding
 
 class OrderAdapter(private var orderList: List<Order>) : RecyclerView.Adapter<OrderViewHolder>() {

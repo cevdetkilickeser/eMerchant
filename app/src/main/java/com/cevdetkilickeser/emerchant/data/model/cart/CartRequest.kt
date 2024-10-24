@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant.data.entity.cart
+package com.cevdetkilickeser.emerchant.data.model.cart
 
 import com.google.gson.annotations.SerializedName
 

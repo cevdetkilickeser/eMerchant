@@ -1,4 +1,4 @@
-package com.cevdetkilickeser.emerchant.data.entity.order
+package com.cevdetkilickeser.emerchant.data.model.order
 
 
 import com.google.gson.annotations.SerializedName

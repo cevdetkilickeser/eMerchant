@@ -1,10 +1,10 @@
-package com.cevdetkilickeser.emerchant.data.entity.like
+package com.cevdetkilickeser.emerchant.data.model.like
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cevdetkilickeser.emerchant.data.entity.product.Product
+import com.cevdetkilickeser.emerchant.data.model.product.Product
 
 @Entity(tableName = "likes")
 data class Like(
