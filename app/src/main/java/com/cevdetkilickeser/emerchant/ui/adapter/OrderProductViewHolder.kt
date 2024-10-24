@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cevdetkilickeser.emerchant.data.entity.order.OrderProduct
 import com.cevdetkilickeser.emerchant.databinding.OrderProductViewBinding
-import java.util.Locale
+import com.cevdetkilickeser.emerchant.utils.formatPrice
 
 class OrderProductViewHolder(val binding: OrderProductViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -13,14 +13,8 @@ class OrderProductViewHolder(val binding: OrderProductViewBinding) :
             Glide.with(this.root).load(orderProduct.thumbnail).into(this.imageViewOrderProduct)
             orderProductTitle.text = orderProduct.title
             orderProductQuantity.text = orderProduct.quantity.toString()
-            orderProductPrice.text = buildString {
-                append("$ ")
-                append(String.format(Locale.US, "%.2f", orderProduct.price))
-            }
-            orderProductTotal.text = buildString {
-                append("$ ")
-                append(String.format(Locale.US, "%.2f", orderProduct.total))
-            }
+            orderProductPrice.text = formatPrice(orderProduct.price)
+            orderProductTotal.text = formatPrice(orderProduct.total)
         }
     }
 }

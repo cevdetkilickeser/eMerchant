@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cevdetkilickeser.emerchant.data.entity.like.Like
 import com.cevdetkilickeser.emerchant.databinding.LikeViewBinding
+import com.cevdetkilickeser.emerchant.utils.formatPrice
 
 
 class LikeViewHolder(var binding: LikeViewBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -14,10 +15,7 @@ class LikeViewHolder(var binding: LikeViewBinding) : RecyclerView.ViewHolder(bin
         with(binding) {
             Glide.with(this.root).load(product.thumbnail).into(this.likeViewImage)
             likeViewTitle.text = product.title
-            likeViewPrice.text = buildString {
-                append("$ ")
-                append(product.price)
-            }
+            likeViewPrice.text = formatPrice(product.price)
             likeImageViewDelete.setOnClickListener {
                 onClickDeleteLikeButton(like)
             }
