@@ -15,6 +15,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private val _cart = MutableLiveData<Cart?>()
+    val cart: LiveData<Cart?> = _cart
 
     private val _cartProductList = MutableLiveData<List<CartProduct>>()
     val cartProductList: LiveData<List<CartProduct>> = _cartProductList
@@ -25,30 +26,25 @@ class CartViewModel @Inject constructor(private val repository: Repository) : Vi
     private val _isEmptyCart = MutableLiveData<Boolean>()
     val isEmptyCart: LiveData<Boolean> = _isEmptyCart
 
-    private val _cartTotal = MutableLiveData<Double>()
-    val cartTotal: LiveData<Double> = _cartTotal
-
     fun getCart(userId: Int) {
         viewModelScope.launch {
+            _isProgress.value = true
             _cart.value = repository.getCart(userId)
             _cartProductList.value = _cart.value?.cartProducts ?: emptyList()
             _isProgress.value = false
             _isEmptyCart.value = _cart.value == null
-            _cartTotal.value = _cart.value?.total ?: 0.0
         }
     }
 
-    fun updateCartProductQuantity(userId: Int, productId: Int, updateUp: Boolean) {
+    fun updateCart(userId: Int, cartProduct: CartProduct, isUpdateUp: Boolean) {
         viewModelScope.launch {
-            if (updateUp) {
-                _isProgress.value = true
-                repository.increaseQuantity(userId, productId)
+            _isProgress.value = true
+            if (isUpdateUp) {
+                repository.increaseQuantity(userId, cartProduct.id) {}
             } else {
-                _isProgress.value = true
-                repository.decreaseQuantity(userId, productId)
+                repository.decreaseQuantity(userId, cartProduct.id)
             }
-            _cart.value = repository.getCart(userId)
-            _isProgress.value = false
+            getCart(userId)
         }
     }
 }
