@@ -3,8 +3,8 @@ package com.cevdetkilickeser.emerchant.di
 import android.content.Context
 import com.cevdetkilickeser.emerchant.data.datasource.DataSource
 import com.cevdetkilickeser.emerchant.data.repo.Repository
+import com.cevdetkilickeser.emerchant.retrofit.ApiService
 import com.cevdetkilickeser.emerchant.retrofit.ApiUtils
-import com.cevdetkilickeser.emerchant.retrofit.ServiceDao
 import com.cevdetkilickeser.emerchant.room.AppDatabase
 import com.cevdetkilickeser.emerchant.room.LikeDao
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,13 +30,13 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideServiceDatasource(serviceDao: ServiceDao, likeDao: LikeDao): DataSource {
-        return DataSource(serviceDao, likeDao)
+    fun provideServiceDatasource(apiService: ApiService, likeDao: LikeDao): DataSource {
+        return DataSource(apiService, likeDao)
     }
 
     @Provides
     @Singleton
-    fun provideServiceDao(): ServiceDao {
+    fun provideServiceDao(): ApiService {
         return ApiUtils.getServiceDao()
     }
 
