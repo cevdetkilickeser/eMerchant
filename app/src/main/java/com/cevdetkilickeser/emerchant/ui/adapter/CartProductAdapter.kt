@@ -8,8 +8,7 @@ import com.cevdetkilickeser.emerchant.databinding.CartProductViewBinding
 
 class CartProductAdapter(
     private var cartProducts: List<CartProduct>,
-    private val onClickButtonIncrease: (Int, Boolean) -> Unit,
-    private val onClickButtonDecrease: (Int, Boolean) -> Unit
+    private val updateCart: (CartProduct, Boolean) -> Unit
 ) :
     RecyclerView.Adapter<CartProductViewHolder>() {
 
@@ -24,6 +23,6 @@ class CartProductAdapter(
     }
 
     override fun onBindViewHolder(holder: CartProductViewHolder, position: Int) {
-        holder.bind(cartProducts[position], onClickButtonIncrease, onClickButtonDecrease)
+        holder.bind(cartProducts[position], updateCart)
     }
 }
