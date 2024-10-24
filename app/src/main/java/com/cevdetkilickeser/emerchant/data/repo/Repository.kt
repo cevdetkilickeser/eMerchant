@@ -16,7 +16,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CopyOnWriteArrayList
 
-class Repository(private val dataSource: DataSource, private val firebaseDB: FirebaseFirestore) {
+class Repository(private val dataSource: DataSource, firebaseDB: FirebaseFirestore) {
 
     suspend fun login(username: String, password: String): User? =
         dataSource.login(username, password)
@@ -53,15 +53,12 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
 
     // ----------------  Firebase Repo  ---------------- \\
 
-    var isAdded = true
-    private lateinit var cartRef: CollectionReference
+    private val cartRef: CollectionReference = firebaseDB.collection("cart")
     private val cartRequestProducts = CopyOnWriteArrayList<CartRequestProduct>()
 
     private suspend fun getFirebaseCartProducts(userId: Int) {
         cartRequestProducts.clear()
         val tempCartRequestProduct = mutableListOf<CartRequestProduct>()
-        cartRef = firebaseDB.collection("cart")
-        firebaseDB.collection("cart")
         val querySnapshot = cartRef
             .whereEqualTo("userId", userId)
             .get()
@@ -73,16 +70,16 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
                 val cartProduct = CartRequestProduct(productId, quantity)
                 tempCartRequestProduct.add(cartProduct)
             }
-            cartRequestProducts.addAllAbsent(tempCartRequestProduct.sortedBy { it.productId })
+            cartRequestProducts.addAll(tempCartRequestProduct.sortedBy { it.productId })
         }
     }
 
-    suspend fun onClickAddToCart(userId: Int, productId: Int) {
+    suspend fun onClickAddToCart(userId: Int, productId: Int, onResult: (Boolean) -> Unit) {
         val querySnapshot = checkFirestoreCart(userId, productId)
         if (querySnapshot.isEmpty) {
-            addFirestoreCart(userId, productId)
+            addFirestoreCart(userId, productId, onResult)
         } else {
-            increaseQuantity(userId, productId)
+            increaseQuantity(userId, productId, onResult)
         }
     }
 
@@ -94,22 +91,23 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
             .await()
     }
 
-    private suspend fun addFirestoreCart(userId: Int, productId: Int) {
-        firebaseDB.collection("cart")
+    private suspend fun addFirestoreCart(userId: Int, productId: Int, onResult: (Boolean) -> Unit) {
+        cartRef
             .add(mapOf("userId" to userId, "productId" to productId, "quantity" to 1))
             .addOnSuccessListener {
-                isAdded = true
+                onResult.invoke(true)
             }.addOnFailureListener {
-                isAdded = false
+                onResult.invoke(true)
             }
             .await()
     }
 
-    suspend fun increaseQuantity(userId: Int, productId: Int) {
+    suspend fun increaseQuantity(userId: Int, productId: Int, onResult: (Boolean) -> Unit) {
         val querySnapshot = checkFirestoreCart(userId, productId)
         val document = querySnapshot.documents.first()
         val newQuantity = document.getLong("quantity")?.plus(1) ?: 1
         cartRef.document(document.id).update("quantity", newQuantity)
+            .addOnSuccessListener { onResult.invoke(true) }
             .await()
     }
 
@@ -125,12 +123,6 @@ class Repository(private val dataSource: DataSource, private val firebaseDB: Fir
             cartRef.document(document.id).update("quantity", newQuantity)
                 .await()
         }
-    }
-
-    suspend fun deleteFirestoreCart(userId: Int, productId: Int) {
-        val querySnapshot = checkFirestoreCart(userId, productId)
-        val document = querySnapshot.documents.first()
-        cartRef.document(document.id).delete()
     }
 
     // ----------------  Room Repo  ---------------- \\
