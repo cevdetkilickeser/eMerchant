@@ -1,6 +1,5 @@
 [versions]
 agp = "8.4.2"
-eventbus = "3.3.1"
 firebaseBom = "33.1.1"
 fragmentKtx = "1.8.0"
 glide = "4.16.0"
@@ -35,7 +34,6 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
-eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }

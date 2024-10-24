@@ -85,9 +85,6 @@ dependencies {
     //Glide
     implementation(libs.glide)
 
-    //EventBus
-    implementation(libs.eventbus)
-
     //Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
