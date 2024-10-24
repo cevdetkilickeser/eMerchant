@@ -22,7 +22,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        if (remoteMessage.notification != null) {
+        remoteMessage.notification?.let {
             generateNotification(
                 remoteMessage.notification!!.title!!,
                 remoteMessage.notification!!.body!!
