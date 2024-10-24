@@ -1,9 +1,10 @@
 package com.cevdetkilickeser.emerchant.data.model.user
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName("email")
     val email: String,
@@ -23,4 +24,4 @@ data class User(
     val token: String,
     @SerializedName("username")
     val username: String
-) : Serializable
+) : Parcelable

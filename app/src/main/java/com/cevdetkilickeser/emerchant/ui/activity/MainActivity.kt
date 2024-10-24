@@ -16,9 +16,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.cevdetkilickeser.emerchant.R
-import com.cevdetkilickeser.emerchant.data.entity.user.User
+import com.cevdetkilickeser.emerchant.data.model.user.User
 import com.cevdetkilickeser.emerchant.databinding.ActivityMainBinding
 import com.cevdetkilickeser.emerchant.databinding.DrawerHeaderBinding
+import com.cevdetkilickeser.emerchant.utils.parcelable
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.ConfigUpdate
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         NavigationUI.setupWithNavController(binding.navigationView, navHostFragment.navController)
 
-        val user = intent.getSerializableExtra("user") as User
+        val user = intent.parcelable<User>("user")!!
         sharedPref = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
         binding.buttonLogout.setOnClickListener {
