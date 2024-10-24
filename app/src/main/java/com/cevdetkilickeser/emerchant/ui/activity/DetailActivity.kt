@@ -14,6 +14,7 @@ import com.cevdetkilickeser.emerchant.data.entity.product.Review
 import com.cevdetkilickeser.emerchant.databinding.ActivityDetailBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.ReviewAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.DetailViewModel
+import com.cevdetkilickeser.emerchant.utils.formatPrice
 import com.cevdetkilickeser.emerchant.utils.parcelable
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -39,21 +40,10 @@ class DetailActivity : AppCompatActivity() {
         viewModel.checkLike(userId, product.id)
 
         viewModel.like.observe(this) { likeProduct ->
-            likeProduct?.let {
-                binding.detailPageCheckbox.isChecked = true
-                this.like = it
-
-            } ?: run {
-                binding.detailPageCheckbox.isChecked = false
-                this.like = Like(0, userId, product)
-            }
+            observeLike(userId, product, likeProduct)
         }
 
         setViewValues(product)
-
-        viewModel.isAdded.observe(this) { isAdded ->
-            showSnackBar(product, isAdded)
-        }
 
         binding.detailPageBackButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -69,7 +59,20 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.detailPageAddToCartButton.setOnClickListener {
-            viewModel.onClickAddToCart(userId.toInt(), product.id)
+            viewModel.onClickAddToCart(userId.toInt(), product.id) { isSuccess ->
+                showSnackBar(product, isSuccess)
+            }
+        }
+    }
+
+    private fun observeLike(userId: String, product: Product, likeProduct: Like?) {
+        likeProduct?.let {
+            binding.detailPageCheckbox.isChecked = true
+            this.like = it
+
+        } ?: run {
+            binding.detailPageCheckbox.isChecked = false
+            this.like = Like(0, userId, product)
         }
     }
 
@@ -88,13 +91,14 @@ class DetailActivity : AppCompatActivity() {
             detailPageWidth.text = product.dimensions.width.toString()
             detailPageHeight.text = product.dimensions.height.toString()
             detailPageDepth.text = product.dimensions.depth.toString()
-            detailPagePrice.text = "$ " + product.price.toString()
+            detailPagePrice.text = formatPrice(product.price)
         }
     }
 
     private fun showReviewsBottomSheet(reviews: List<Review>) {
         val bottomSheetDialog = BottomSheetDialog(this)
-        val bottomSheetView = layoutInflater.inflate(R.layout.layout_bottom_sheet_reviews, null)
+        val bottomSheetView =
+            layoutInflater.inflate(R.layout.layout_bottom_sheet_reviews, binding.root, false)
         bottomSheetDialog.setContentView(bottomSheetView)
 
         val recyclerViewReviews =
@@ -104,8 +108,8 @@ class DetailActivity : AppCompatActivity() {
         bottomSheetDialog.show()
     }
 
-    private fun showSnackBar(product: Product, isAdded: Boolean) {
-        if (isAdded) {
+    private fun showSnackBar(product: Product, isSuccess: Boolean) {
+        if (isSuccess) {
             Snackbar.make(
                 binding.root,
                 "${product.title} has been successfully added to the cart",

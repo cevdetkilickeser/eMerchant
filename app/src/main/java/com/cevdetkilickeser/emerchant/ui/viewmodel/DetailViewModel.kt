@@ -13,7 +13,6 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     val like = MutableLiveData<Like>()
-    val isAdded = MutableLiveData<Boolean>()
 
     fun checkLike(userId: String, productId: Int) {
         viewModelScope.launch {
@@ -35,10 +34,9 @@ class DetailViewModel @Inject constructor(private val repository: Repository) : 
         }
     }
 
-    fun onClickAddToCart(userId: Int, productId: Int) {
+    fun onClickAddToCart(userId: Int, productId: Int, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            repository.onClickAddToCart(userId, productId)
-            isAdded.value = repository.isAdded
+            repository.onClickAddToCart(userId, productId, onResult)
         }
     }
 }
