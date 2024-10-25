@@ -80,11 +80,11 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonApproveCart"
+            android:id="@+id/buttonCheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_margin="10dp"
-            android:text="@string/approva_cart" />
+            android:text="@string/checkout" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

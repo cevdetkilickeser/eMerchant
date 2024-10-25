@@ -57,6 +57,6 @@
     <string name="updateProfileTitle">Update Profile</string>
 
     <!-- Cart Fragment -->
-    <string name="approva_cart">Approve Cart</string>
+    <string name="checkout">Checkout</string>
 
 </resources>
