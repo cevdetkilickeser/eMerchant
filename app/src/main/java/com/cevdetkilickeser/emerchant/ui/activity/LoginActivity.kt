@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.user.observe(this) { user ->
             user?.let {
-                editor.putString("token", it.token)
+                editor.putString("token", it.accessToken)
                 editor.putString("userId", it.id.toString())
                 editor.apply()
 

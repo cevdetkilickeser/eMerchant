@@ -20,8 +20,8 @@ data class User(
     val lastName: String,
     @SerializedName("refreshToken")
     val refreshToken: String,
-    @SerializedName("token")
-    val token: String,
+    @SerializedName("accessToken")
+    val accessToken: String,
     @SerializedName("username")
     val username: String
 ) : Parcelable

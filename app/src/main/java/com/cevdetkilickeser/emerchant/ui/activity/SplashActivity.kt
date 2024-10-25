@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
 
         viewModel.user.observe(this) { user ->
             user?.let {
-                editor.putString("token", it.token)
+                editor.putString("token", it.accessToken)
                 editor.putString("userId", user.id.toString())
                 editor.apply()
 
