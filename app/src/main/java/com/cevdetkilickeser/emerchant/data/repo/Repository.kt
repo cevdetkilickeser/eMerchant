@@ -9,6 +9,7 @@ import com.cevdetkilickeser.emerchant.data.model.product.Product
 import com.cevdetkilickeser.emerchant.data.model.profile.Profile
 import com.cevdetkilickeser.emerchant.data.model.profile.UpdateProfileRequest
 import com.cevdetkilickeser.emerchant.data.model.user.User
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.concurrent.CopyOnWriteArrayList
@@ -51,7 +52,18 @@ interface Repository {
 
     suspend fun decreaseQuantity(userId: Int, productId: Int)
 
-    suspend fun checkout(userId: Int, cart: Cart, onResult: (Boolean) -> Unit)
+    suspend fun deleteProductFromCart(userId: Int, productId: Int)
+
+    suspend fun deleteCart(userId: Int)
+
+    suspend fun checkout(
+        userId: Int,
+        order: Order,
+        orderDate: Timestamp,
+        onResult: (Boolean) -> Unit
+    )
+
+    suspend fun getFireBaseOrder(userId: Int): List<Order>
 
     // ----------------  Room  ---------------- \\
 

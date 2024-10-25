@@ -5,13 +5,16 @@ import com.cevdetkilickeser.emerchant.data.model.cart.Cart
 import com.cevdetkilickeser.emerchant.data.model.cart.CartRequestProduct
 import com.cevdetkilickeser.emerchant.data.model.category.Category
 import com.cevdetkilickeser.emerchant.data.model.like.Like
+import com.cevdetkilickeser.emerchant.data.model.order.FirebaseOrderResponse
 import com.cevdetkilickeser.emerchant.data.model.order.Order
 import com.cevdetkilickeser.emerchant.data.model.product.Product
 import com.cevdetkilickeser.emerchant.data.model.profile.Profile
 import com.cevdetkilickeser.emerchant.data.model.profile.UpdateProfileRequest
 import com.cevdetkilickeser.emerchant.data.model.user.User
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CopyOnWriteArrayList
@@ -19,7 +22,7 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val dataSource: DataSource,
-    firebaseDB: FirebaseFirestore
+    private val firebaseDB: FirebaseFirestore
 ) : Repository {
 
     override suspend fun login(username: String, password: String): User? =
@@ -145,15 +148,54 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun checkout(userId: Int, cart: Cart, onResult: (Boolean) -> Unit) {
+    override suspend fun deleteProductFromCart(userId: Int, productId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteCart(userId: Int) {
+        cartRef
+            .whereEqualTo("userId", userId)
+            .get()
+            .addOnSuccessListener { documents ->
+                val batch = firebaseDB.batch()
+                for (document in documents) {
+                    batch.delete(document.reference)
+                }
+                batch.commit()
+            }
+            .await()
+    }
+
+    override suspend fun checkout(
+        userId: Int,
+        order: Order,
+        orderDate: Timestamp,
+        onResult: (Boolean) -> Unit
+    ) {
         orderRef
-            .add(mapOf("userId" to userId, "cart" to cart))
+            .add(mapOf("userId" to userId, "order" to order, "orderDate" to orderDate))
             .addOnSuccessListener {
                 onResult.invoke(true)
             }.addOnFailureListener {
                 onResult.invoke(true)
             }
+    }
+
+    override suspend fun getFireBaseOrder(userId: Int): List<Order> {
+        val ordersList = mutableListOf<Order>()
+
+        val querySnapshot = orderRef
+            .whereEqualTo("userId", userId)
+            .orderBy("orderDate", Query.Direction.DESCENDING)
+            .get()
             .await()
+
+        for (document in querySnapshot.documents) {
+            val orderResponse = document.toObject(FirebaseOrderResponse::class.java)!!
+            val order = orderResponse.order!!.copy(id = document.id)
+            ordersList.add(order)
+        }
+        return ordersList
     }
 
     override suspend fun getLikes(userId: String): List<Like> =
