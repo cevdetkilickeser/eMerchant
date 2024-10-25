@@ -1,21 +1,22 @@
 package com.cevdetkilickeser.emerchant.data.model.order
 
 
+import com.cevdetkilickeser.emerchant.data.model.cart.CartProduct
 import com.google.gson.annotations.SerializedName
 
 data class Order(
     @SerializedName("id")
-    val id: Int,
+    val id: String = "",
     @SerializedName("products")
-    val orderProducts: List<OrderProduct>,
+    val orderProducts: List<CartProduct> = emptyList(),
     @SerializedName("total")
-    val total: Double,
+    val total: Double = 0.0,
     @SerializedName("discountedTotal")
-    val discountedTotal: Double,
+    val discountedTotal: Double = 0.0,
     @SerializedName("userId")
-    val userId: Int,
+    val userId: Int = 0,
     @SerializedName("totalProducts")
-    val totalProducts: Int,
+    val totalProducts: Int = 0,
     @SerializedName("totalQuantity")
-    val totalQuantity: Int
+    val totalQuantity: Int = 0
 )

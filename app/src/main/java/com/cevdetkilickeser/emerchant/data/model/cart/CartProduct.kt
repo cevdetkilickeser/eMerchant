@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName
 
 data class CartProduct(
     @SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
     @SerializedName("title")
-    val title: String,
+    val title: String = "",
     @SerializedName("price")
-    val price: Double,
+    val price: Double = 0.0,
     @SerializedName("quantity")
-    val quantity: Int,
+    val quantity: Int = 0,
     @SerializedName("total")
-    val total: Double,
+    val total: Double = 0.0,
     @SerializedName("discountPercentage")
-    val discountPercentage: Double,
+    val discountPercentage: Double = 0.0,
     @SerializedName("discountedPrice")
-    val discountedPrice: Int,
+    val discountedPrice: Int = 0,
     @SerializedName("thumbnail")
-    val thumbnail: String
+    val thumbnail: String = ""
 )
