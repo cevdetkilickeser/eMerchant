@@ -35,6 +35,7 @@ interface Repository {
 
     // ----------------  Firebase  ---------------- \\
 
+    var orderRef: CollectionReference
     var cartRef: CollectionReference
     var cartRequestProducts: CopyOnWriteArrayList<CartRequestProduct>
 
@@ -49,6 +50,8 @@ interface Repository {
     suspend fun increaseQuantity(userId: Int, productId: Int, onResult: (Boolean) -> Unit)
 
     suspend fun decreaseQuantity(userId: Int, productId: Int)
+
+    suspend fun checkout(userId: Int, cart: Cart, onResult: (Boolean) -> Unit)
 
     // ----------------  Room  ---------------- \\
 

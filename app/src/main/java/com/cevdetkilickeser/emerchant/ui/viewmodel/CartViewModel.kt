@@ -47,4 +47,10 @@ class CartViewModel @Inject constructor(private val repository: Repository) : Vi
             getCart(userId)
         }
     }
+
+    fun checkout(userId: Int, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            repository.checkout(userId, _cart.value!!, onResult)
+        }
+    }
 }

@@ -57,6 +57,8 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+    override var orderRef: CollectionReference = firebaseDB.collection("order")
+
     override var cartRef: CollectionReference = firebaseDB.collection("cart")
 
     override var cartRequestProducts: CopyOnWriteArrayList<CartRequestProduct> =
@@ -141,6 +143,17 @@ class RepositoryImpl @Inject constructor(
             cartRef.document(document.id).update("quantity", newQuantity)
                 .await()
         }
+    }
+
+    override suspend fun checkout(userId: Int, cart: Cart, onResult: (Boolean) -> Unit) {
+        orderRef
+            .add(mapOf("userId" to userId, "cart" to cart))
+            .addOnSuccessListener {
+                onResult.invoke(true)
+            }.addOnFailureListener {
+                onResult.invoke(true)
+            }
+            .await()
     }
 
     override suspend fun getLikes(userId: String): List<Like> =

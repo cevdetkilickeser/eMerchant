@@ -13,6 +13,7 @@ import com.cevdetkilickeser.emerchant.databinding.FragmentCartBinding
 import com.cevdetkilickeser.emerchant.ui.adapter.CartProductAdapter
 import com.cevdetkilickeser.emerchant.ui.viewmodel.CartViewModel
 import com.cevdetkilickeser.emerchant.utils.formatPrice
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +30,10 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(layoutInflater, container, false)
+
+        binding.buttonCheckout.setOnClickListener {
+            viewModel.checkout(userId, ::showSnackBar)
+        }
 
         viewModel.cartProductList.observe(viewLifecycleOwner) { cartProductList ->
             val cartProductAdapter = CartProductAdapter(cartProductList, ::updateCart)
@@ -48,6 +53,14 @@ class CartFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun showSnackBar(showSnackBar: Boolean) {
+        if (showSnackBar) {
+            Snackbar.make(binding.root, "Success", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(binding.root, "Error", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun showProgressBar(showProgress: Boolean) {
