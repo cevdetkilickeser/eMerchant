@@ -11,7 +11,7 @@ data class Cart(
     @SerializedName("total")
     val total: Double,
     @SerializedName("discountedTotal")
-    val discountedTotal: Int,
+    val discountedTotal: Double,
     @SerializedName("userId")
     val userId: Int,
     @SerializedName("totalProducts")
