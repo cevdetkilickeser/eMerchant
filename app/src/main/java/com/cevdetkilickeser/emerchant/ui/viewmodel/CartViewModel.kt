@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.cevdetkilickeser.emerchant.data.model.cart.Cart
 import com.cevdetkilickeser.emerchant.data.model.cart.CartProduct
 import com.cevdetkilickeser.emerchant.data.repo.Repository
+import com.cevdetkilickeser.emerchant.utils.mapCartToOrder
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -50,7 +52,11 @@ class CartViewModel @Inject constructor(private val repository: Repository) : Vi
 
     fun checkout(userId: Int, onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            repository.checkout(userId, _cart.value!!, onResult)
+            val order = mapCartToOrder(_cart.value!!)
+            val orderDate = Timestamp.now()
+            repository.checkout(userId, order, orderDate, onResult)
+            repository.deleteCart(userId)
+            getCart(userId)
         }
     }
 }
